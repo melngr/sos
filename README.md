@@ -1,5 +1,5 @@
 # sos
-Surviving Open Source
+Surviving Open Source</br>
 
-A fun choose your path game showing the difficulties navagating the open source world!
+A fun choose your path game showing the difficulties navagating the open source world!</br>
 CLI game base with dungeon crawling elements!
