@@ -1,0 +1,2 @@
+# sos
+Surviving Open Source
