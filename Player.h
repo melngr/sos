@@ -15,7 +15,8 @@ typedef unsigned int uint;
 
 class Player {
 public:
-    Player(std::string name);
+    Player();
+    Player(std::string aName, Node aPos);
 
 // ----------------------------------------------------------------
 // ACCESSORS
@@ -39,7 +40,7 @@ public:
 // ----------------------------------------------------------------
 // MEMBER FUNCTIONS
 
-    void traverse(Node new_pos);
+    bool traverse(Node newPos);
 
 
 // ----------------------------------------------------------------
