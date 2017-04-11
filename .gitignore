@@ -38,4 +38,6 @@
 
 # ignore build files
 Debug
-Release 
+Release
+/.idea/
+/cmake-build-debug/
