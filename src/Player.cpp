@@ -9,18 +9,15 @@ typedef unsigned int uint;
 // The default constructor creates a Player object that 'NULL' for all member
 // variables except 'decs' which is set to 0.
 Player::Player() {
-    uint decs = 0;
+    decs = 0;
     std::string name = NULL;
-    Node pos = NULL;
-    std::map< std::string, uint > = NULL;
+    pos = Node();
 }
 
 Player::Player(std::string aName, Node aPos) {
-    uint decs = 0;
+    decs = 0;
     std::string name = aName;
-    Node pos = aPos;
-    // This line is not correct, but it won't return an error if called.
-    std::map< std::string, uint > skills = NULL;
+    pos = aPos;
 }
 
 // ----------------------------------------------------------------
@@ -61,6 +58,6 @@ void Player::mod_vc(int mod) {
 // MEMBER FUNCTIONS
 
 bool Player::traverse(Node newPos) {
-    added = false;
+    bool added = false;
     return added;
 }

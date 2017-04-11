@@ -45,5 +45,5 @@ private:
     std::string description;
     std::map< std::string, int > mods;
     // Node[] next;
-    Node prev;
+    Node* prev;
 } ;
