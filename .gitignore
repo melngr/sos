@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# ignore eclipse project files
+.settings
+.cproject
+.project
+
+# ignore build files
+Debug
+Release 
