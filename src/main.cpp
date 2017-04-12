@@ -7,9 +7,15 @@
  * manages game interactions
 */
 
+#include <iostream>
+#include <string>
+
 #include "Entity.h"
 #include "Usable.h"
 
 int main(int argc, char** argv) {
+	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
+	std::cout << "Currently an active project for CSCI2963" << std::endl;
+
 	return 0;
 }
