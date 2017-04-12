@@ -20,7 +20,7 @@ public:
 	virtual int use(int inputval);
 	virtual void discard();
 
-protected:
+private:
 	std::string _name;
 	int _uses;
 	int _maxuses;

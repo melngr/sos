@@ -28,7 +28,7 @@ public:
 	void updateAttack(int atk);
 	void updateDefense(int def);
 
-protected:
+private:
 	std::string _name;
 	int _stamina;
 	int _attack;
