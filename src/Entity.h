@@ -6,7 +6,9 @@
  * Player and Monster will have other unique features tied to them
  */
 
-#include <iostream>
+#ifndef ENTITY_H
+#define ENTITY_H
+
 #include <string>
 
 class Entity {
@@ -26,9 +28,11 @@ public:
 	void updateAttack(int atk);
 	void updateDefense(int def);
 
-private:
+protected:
 	std::string _name;
 	int _stamina;
 	int _attack;
 	int _defense;
 };
+
+#endif
