@@ -17,6 +17,7 @@ class Player : public Entity {
 public:
 	//give the player a name
 	Player(std::string name);
+	~Player();
 
 	//use Skill or Item from members
 	int useSkill(int index);
@@ -24,8 +25,8 @@ public:
 
 private:
 	//Skill and Item stored in a vector
-	//std::vector<Skill> _skills
-	//std::vector<Item> _items
+	//std::vector<Skill*> _skills
+	//std::vector<Item*> _items
 };
 
 #endif

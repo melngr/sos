@@ -13,6 +13,9 @@ Player::Player(std::string name) : Entity() {
 	_name = name;
 }
 
+Player::~Player() {
+}
+
 int Player::useSkill(int index) {
 	return 0;
 }

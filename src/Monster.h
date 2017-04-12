@@ -5,6 +5,9 @@
  * have Skill like the Player but cant use Items
  */
 
+#ifndef MONSTER_H
+#define MONSTER_H
+
 #include <string>
 
 #include "Entity.h"
@@ -21,3 +24,5 @@ private:
 	//Monster only has Skill vector
 	//std::vector<Skill> _skills
 };
+
+#endif

@@ -8,8 +8,9 @@ include_directories(${PROJECT_SOURCE_DIR}/test)
 
 set(SOS_SOURCES
         src/Entity.cpp
-        src/Usable.cpp
         src/Player.cpp
-        src/Monster.cpp)
+        src/Monster.cpp
+        src/Usable.cpp
+        src/Skill.cpp)
 
 add_executable(sos_game ${PROJECT_SOURCE_DIR}/src/main.cpp ${SOS_SOURCES})

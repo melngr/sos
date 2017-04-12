@@ -11,7 +11,10 @@
 #include <string>
 
 #include "Entity.h"
+#include "Player.h"
+#include "Monster.h"
 #include "Usable.h"
+#include "Skill.h"
 
 int main(int argc, char** argv) {
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;

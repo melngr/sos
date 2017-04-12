@@ -16,6 +16,10 @@ Entity::Entity() {
 	_defense = 0;
 }
 
+Entity::~Entity() {
+	delete(this);
+}
+
 std::string Entity::getName() {	return _name; }
 int Entity::getStamina() { return _stamina; }
 int Entity::getAttack() { return _attack; }

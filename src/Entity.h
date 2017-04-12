@@ -15,6 +15,7 @@ class Entity {
 public:
 	//constructors
 	Entity();
+	virtual ~Entity();
 
 	//accessors for debugging/calculations elsewhere
 	std::string getName();
@@ -27,6 +28,10 @@ public:
 	void updateStamina(int stam);
 	void updateAttack(int atk);
 	void updateDefense(int def);
+
+	//use Skill or Item
+	virtual int useSkill(int index);
+	virtual int useItem(int index);
 
 protected:
 	//members of both Monster and Player
