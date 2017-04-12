@@ -28,7 +28,8 @@ public:
 	void updateAttack(int atk);
 	void updateDefense(int def);
 
-private:
+protected:
+	//members of both Monster and Player
 	std::string _name;
 	int _stamina;
 	int _attack;
