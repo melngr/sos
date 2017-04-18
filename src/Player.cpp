@@ -9,8 +9,7 @@
 
 #include "Player.h"
 
-Player::Player(std::string name) : Entity() {
-	_name = name;
+Player::Player(std::string name) : Entity(name) {
 }
 
 Player::~Player() {

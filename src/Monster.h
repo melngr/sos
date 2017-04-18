@@ -16,6 +16,7 @@ class Monster : public  Entity {
 public:
 	//give the Monster a name
 	Monster(std::string name);
+	~Monster();
 
 	//use Skill
 	int useSkill(int index);

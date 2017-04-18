@@ -13,8 +13,7 @@
 
 class Entity {
 public:
-	//constructors
-	Entity();
+	Entity(std::string name);
 	virtual ~Entity();
 
 	//accessors for debugging/calculations elsewhere
@@ -30,8 +29,8 @@ public:
 	void updateDefense(int def);
 
 	//use Skill or Item
-	virtual int useSkill(int index);
-	virtual int useItem(int index);
+	virtual int useSkill(int index) = 0;
+	virtual int useItem(int index) = 0;
 
 protected:
 	//members of both Monster and Player

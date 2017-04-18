@@ -9,15 +9,14 @@
 
 #include "Entity.h"
 
-Entity::Entity() {
-	_name = "new Entity";
+Entity::Entity(std::string name) {
+	_name = name;
 	_stamina = 0;
 	_attack = 0;
 	_defense = 0;
 }
 
 Entity::~Entity() {
-	delete(this);
 }
 
 std::string Entity::getName() {	return _name; }

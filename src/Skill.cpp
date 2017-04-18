@@ -9,12 +9,10 @@
 
 #include "Skill.h"
 
-Skill::Skill() : Usable() {
-	_name = "new Skill";
+Skill::Skill(std::string name, int maxuses) : Usable(name, maxuses) {
 }
 
 Skill::~Skill() {
-	return;
 }
 
 int Skill::use(int inputval) {

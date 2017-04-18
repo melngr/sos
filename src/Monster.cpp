@@ -9,8 +9,10 @@
 
 #include "Monster.h"
 
-Monster::Monster(std::string name) : Entity() {
-	_name = name;
+Monster::Monster(std::string name) : Entity(name) {
+}
+
+Monster::~Monster() {
 }
 
 int Monster::useSkill(int index) {

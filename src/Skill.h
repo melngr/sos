@@ -15,7 +15,7 @@
 
 class Skill : public Usable {
 public:
-	Skill();
+	Skill(std::string name, int maxuses);
 	~Skill();
 
 	int use(int inputval);

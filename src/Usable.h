@@ -14,9 +14,7 @@
 class Usable {
 public:
 	//Constructor
-	Usable();
-	Usable(std::string name);
-	Usable(std::string name, int uses, int maxuses);
+	Usable(std::string name, int maxuses);
 	virtual ~Usable();
 
 	//accessors
@@ -27,8 +25,8 @@ public:
 	void updateName(std::string name);
 
 	//use and discard vary by Skill or Item
-	virtual int use(int inputval);
-	virtual void discard();
+	virtual int use(int inputval) = 0;
+	virtual void discard() = 0;
 
 protected:
 	std::string _name;
