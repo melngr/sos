@@ -9,10 +9,12 @@
 #define MONSTER_H
 
 #include <string>
+#include <vector>
+#include <iostream>
 
 #include "Entity.h"
 #include "Skill.h"
-#include <vector>
+
 
 class Monster : public  Entity {
 public:
@@ -23,6 +25,8 @@ public:
 	//use Skill
 	int useSkill(int index);
 	int useItem(int index);
+
+	friend std::ostream& operator<<(std::ostream& ostr, const Monster& m); 
 private:
 	//Monster only has Skill vector
 	std::vector<Skill> _skills;
