@@ -18,3 +18,7 @@ Monster::~Monster() {
 int Monster::useSkill(int index) {
 	return 0;
 }
+
+int Monster::useItem(int index) {
+	return 0;
+}

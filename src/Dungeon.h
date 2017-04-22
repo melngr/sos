@@ -8,13 +8,15 @@
 #include <string>
 #include <vector>
 #include "Monster.h"
+#include <iostream>
 #include "Day.h"
 
 
 
 class Dungeon {
+	static const int MONSTER_ARRAY_SIZE = 10;
 public:
-	Dungeon() { currDay = new Day(); daysPassed = 0;};
+	Dungeon();
 	~Dungeon() { delete currDay; };
 
 	//Day object accessors
@@ -23,15 +25,17 @@ public:
 	float numHrs() {return currDay->hoursOfDay_;}
 
 	void subtractHrs(float numHrs);
+	friend std::ostream& operator<<(std::ostream& ostr, const Dungeon& d);
 
 
 protected:
 	Day* currDay;
 	int daysPassed;
-
+	std::string* monsterTypes;
 
 	void progressToNextDay(); //moves to the next day, likely called from subtract hours
 	Monster generateMonster(int maxIndex); //likely called from progressToNextDay
+
 
 };
 #endif

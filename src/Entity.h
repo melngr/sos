@@ -17,7 +17,7 @@ public:
 	virtual ~Entity();
 
 	//accessors for debugging/calculations elsewhere
-	std::string getName();
+	std::string getName(); 
 	int getStamina();
 	int getAttack();
 	int getDefense();
