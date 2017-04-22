@@ -20,8 +20,10 @@ public:
 
 	int use(int inputval);
 	void discard();
-
+	std::string getClassType() {return "Skill"; };
+	
 private:
+
 };
 
 #endif

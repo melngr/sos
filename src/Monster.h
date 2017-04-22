@@ -22,9 +22,19 @@ public:
 	Monster(std::string name);
 	~Monster();
 
+	std::string getClassType(std::ostream& ostr) const {
+		return "monster"; 
+	}; //return classname as str
+	std::string getNonBasicInfo(std::ostream& ostr) const { 
+		return "good luck defeating me!";
+	}; //returns anything specific to a given class as a string used in operator<<
+
+
 	//use Skill
 	int useSkill(int index);
 	int useItem(int index);
+
+
 
 	friend std::ostream& operator<<(std::ostream& ostr, const Monster& m); 
 private:

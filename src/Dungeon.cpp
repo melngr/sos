@@ -7,7 +7,7 @@
 
 #include "Dungeon.h"
 
-Dungeon::Dungeon(){
+Dungeon::Dungeon(std::string playerName){
 	currDay = new Day(); 
 	daysPassed = 0;
 	std::ifstream ifstr("MonsterNameList.txt");
@@ -26,6 +26,8 @@ Dungeon::Dungeon(){
 	}
 
 	assert(i == MONSTER_ARRAY_SIZE);
+
+	player_ = new Player(playerName);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
@@ -36,6 +38,8 @@ std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 	for(int i = 0; i < d.MONSTER_ARRAY_SIZE; i++){
 		ostr << d.monsterTypes[i] << std::endl;
 	}
+	ostr << "Player: " << *(d.player_) << std::endl;
+
 	ostr << "END OF DUNGEON OBJECT" << std::endl;
 }
 

@@ -10,14 +10,19 @@
 #include "Monster.h"
 #include <iostream>
 #include "Day.h"
+#include "Player.h"
 
 
 
 class Dungeon {
 	static const int MONSTER_ARRAY_SIZE = 10;
 public:
-	Dungeon();
-	~Dungeon() { delete currDay; };
+	Dungeon(std::string);
+	~Dungeon() { 
+		delete currDay; 
+		delete [] monsterTypes; 
+		delete player_; 
+	};
 
 	//Day object accessors
 	std::string getDay() { return currDay->getDayStr(); }
@@ -32,6 +37,7 @@ protected:
 	Day* currDay;
 	int daysPassed;
 	std::string* monsterTypes;
+	Player* player_;
 
 	void progressToNextDay(); //moves to the next day, likely called from subtract hours
 	Monster generateMonster(int maxIndex); //likely called from progressToNextDay

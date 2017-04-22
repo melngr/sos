@@ -16,7 +16,7 @@ public:
 		currDayInd_ = 0;
 		currentMonster_ = new Monster("");
 	};
-
+	~Day() { delete currentMonster_; }
 	//for convenience
 	std::string getDayStr() { return daysOfWeek_[currDayInd_]; }
 	void moveForwardOneDay() { 
