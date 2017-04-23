@@ -27,6 +27,6 @@ int Usable::getMaxuses() { return _maxuses; }
 void Usable::updateName(std::string name) {	_name = name; }
 
 std::ostream& operator<<(std::ostream& ostr, const Usable& u){
-	ostr << "PRINTING A " << u.getClassType(ostr) << ":" << std::endl;
-	ostr << u._name << std::endl;
+	//ostr << "PRINTING A " << u.getClassType(ostr) << ":" << std::endl;
+	ostr << u._name;
 }

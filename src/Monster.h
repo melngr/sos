@@ -34,7 +34,11 @@ public:
 	int useSkill(int index);
 	int useItem(int index);
 
-
+	void setStats(int att, int def, int hp){
+		_attack = att;
+		_defense = def;
+		_stamina = hp;
+	}
 
 	friend std::ostream& operator<<(std::ostream& ostr, const Monster& m); 
 private:

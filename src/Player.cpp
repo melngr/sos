@@ -7,12 +7,16 @@
 
 #include <string>
 #include <sstream>
+#include <iomanip>
 #include "Player.h"
 
 Player::Player(std::string name) : Entity(name) {
 }
 
 Player::~Player() {
+	for(int i = 0; i < _skills.size(); i++){
+		delete _skills[i];
+	}
 }
 
 int Player::useSkill(int index) {
@@ -26,15 +30,15 @@ int Player::useItem(int index) {
 
 
 std::string Player::getNonBasicInfo(std::ostream& ost) const {
+	int colWidth = 15;
 	int count = 0;
 	std::ostringstream ostr;
 	ostr << "Equipped Skills:" << std::endl;
-	ostr.width(30);
 	//could use an extract method thing here
 	int i;
 	for(i = 0; i < _equippedSkills.size(); i++){
-		ostr << _equippedSkills[i];
-		if(i % 4 == 0){
+		ostr << std::setw(colWidth) << *(_equippedSkills[i]) << std::setw(colWidth);
+		if( (i != 0 && i%4 == 0) || (i % 3 == 0 && i == 0) ){
 			ostr << std::endl;
 		}
 	}
@@ -45,10 +49,9 @@ std::string Player::getNonBasicInfo(std::ostream& ost) const {
 	ostr << std::endl;
 	ostr.width(0);
 	ostr << "Possessed Skills: " << std::endl;
-	ostr.width(30);
 	for(i = 0; i < _skills.size(); i++){
-		ostr << _skills[i];
-		if(i % 4 == 0){
+		ostr << std::setw(colWidth) << std::left <<  *(_skills[i]) << std::setw(colWidth);
+		if( (i != 0 && i%4 == 0) || (i % 3 == 0 && i == 0) ){
 			ostr << std::endl;
 		}
 	}
@@ -57,4 +60,4 @@ std::string Player::getNonBasicInfo(std::ostream& ost) const {
 	}
 	ostr << std::endl;
 	return ostr.str();
-}
+}	

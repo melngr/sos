@@ -4,6 +4,10 @@
 #include <sstream>
 #include <iostream>
 #include <cassert>
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include <algorithm>
 
 #include "Dungeon.h"
 
@@ -28,6 +32,7 @@ Dungeon::Dungeon(std::string playerName){
 	assert(i == MONSTER_ARRAY_SIZE);
 
 	player_ = new Player(playerName);
+	//srand(time(NULL)); // generate a random seed
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
@@ -56,4 +61,23 @@ void Dungeon::subtractHrs(float numHrs){
 	}else{
 		currHrs -= numHrs;
 	}
+}
+
+void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int& monsterHp){
+	//based on days passed higher as more days pass.
+	int base = 100;
+	monsterHp = base + daysPassed*2;
+	monsterAtt = 5 + daysPassed*(0.3);
+	monsterDef = 0 + daysPassed*1.1;
+	int nameInd = 0;
+	//int nameInd = rand() % std::min(daysPassed, MONSTER_ARRAY_SIZE);
+	name = monsterTypes[nameInd];
+
+}
+
+void Dungeon::generateMonster(){
+	int monsterHp, monsterAtt, monsterDef;
+	std::string name;
+	scaleStats(name, monsterAtt, monsterDef, monsterHp);
+	currDay->setMonster(name, monsterAtt, monsterDef, monsterHp);
 }

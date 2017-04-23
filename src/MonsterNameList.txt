@@ -8,3 +8,8 @@ Dynamicly Allocate Memory
 Vector Problem
 Linked Lists Problem
 Tree Problem
+Spaghetti Code
+God Class
+Extra large function
+Nonsense Variables
+Dead Code
