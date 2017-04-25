@@ -21,6 +21,7 @@ public:
 	std::string getName();
 	int getUses();
 	int getMaxuses();
+	virtual std::string getClassType(std::ostream& ostr) const {return "Usable";}
 
 	void updateName(std::string name);
 
@@ -28,6 +29,7 @@ public:
 	virtual int use(int inputval) = 0;
 	virtual void discard() = 0;
 
+	friend std::ostream& operator<<(std::ostream& ostr, const Usable& u);
 protected:
 	std::string _name;
 	int _uses;
