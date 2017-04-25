@@ -32,6 +32,8 @@ public:
 		currentMonster_ = new Monster(mName);
 		currentMonster_->setStats(att, def, hp);
 	}
+
+	
 	//day info
 	float hoursOfDay_;
 	unsigned int currDayInd_; //0...6

@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <algorithm>
+#include <math.h>
 
 #include "Dungeon.h"
 
@@ -56,6 +57,8 @@ void Dungeon::subtractHrs(float numHrs){
 	float& currHrs = currDay->hoursOfDay_;
 	if(numHrs >= currHrs){
 		float remainder = numHrs - currHrs;
+		//TODO: if we want to allow skipping days through activities we need to make sure a monster is generated
+		//and then then stored(we only should need to auto store if remainder >= 24)
 		progressToNextDay(); //make day move to the next day
 		subtractHrs(remainder);
 	}else{
@@ -67,8 +70,8 @@ void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int
 	//based on days passed higher as more days pass.
 	int base = 100;
 	monsterHp = base + daysPassed*2;
-	monsterAtt = 5 + daysPassed*(0.3);
-	monsterDef = 0 + daysPassed*1.1;
+	monsterAtt = 5 + ceil(daysPassed*(0.33));
+	monsterDef = 0 + ceil(daysPassed*1.2);
 	int nameInd = 0;
 	//int nameInd = rand() % std::min(daysPassed, MONSTER_ARRAY_SIZE);
 	name = monsterTypes[nameInd];
