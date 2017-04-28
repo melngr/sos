@@ -17,8 +17,12 @@ Skill::Skill(std::string name, int maxuses) : Usable(name, maxuses) {
 Skill::~Skill() {
 }
 
+void Skill::refeshSkills() {
+	_uses = _maxuses;
+}
+
 //use this skill as specified by inputVal
-int Skill::use(int inputval) {
+int Skill::use(int statvalue) {
 	if (_uses <= 0) {
 		return -1;
 	}

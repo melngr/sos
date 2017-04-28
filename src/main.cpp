@@ -16,6 +16,7 @@
 #include "Usable.h"
 #include "Dungeon.h"
 
+
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
 void start(Dungeon& d);
@@ -26,6 +27,7 @@ int main(int argc, char** argv) {
 
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
 	std::cout << "Currently an active project for CSCI2963" << std::endl;
+
 	std::string playerName;
 	std::cout << "Please enter a name:" << std::endl;
 	std::cin >> playerName;
@@ -88,7 +90,7 @@ void start(Dungeon& d){
 			int hrs;
 			std::cout << "For How many hours (int)? " << std::endl;
 			std::cin >> hrs;
-			while(std::cin.fail() || hrs > 24){
+			while(std::cin.fail() || hrs > d.numHrs()){
 				std::cout << "invalid input!" << std::endl;
 				std::cin.clear();
 				std::cin.ignore(10000, '\n');
@@ -107,3 +109,4 @@ void start(Dungeon& d){
 	}
 	
 }
+

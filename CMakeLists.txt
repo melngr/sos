@@ -4,13 +4,18 @@ project(SOS)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
-include_directories(${PROJECT_SOURCE_DIR}/test)
 
 set(SOS_SOURCES
+        src/Day.cpp
+        src/Dungeon.cpp
         src/Entity.cpp
-        src/Player.cpp
+        src/Item.cpp
         src/Monster.cpp
-        src/Usable.cpp
-        src/Skill.cpp)
+        src/Player.cpp
+        src/Skill.cpp
+        src/Usable.cpp)
 
-add_executable(sos_game ${PROJECT_SOURCE_DIR}/src/main.cpp ${SOS_SOURCES})
+set(SOS_SKILLS
+        src/skills/SkillHack.cpp)
+
+add_executable(sos_game ${PROJECT_SOURCE_DIR}/src/main.cpp ${SOS_SOURCES} ${SOS_SKILLS})
