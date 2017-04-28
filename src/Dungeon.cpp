@@ -15,10 +15,15 @@
 Dungeon::Dungeon(std::string playerName){
 	currDay = new Day(); 
 	daysPassed = 0;
-	std::ifstream ifstr("MonsterNameList.txt");
+	std::ifstream ifstr("MonsterNameList.txt",std::ifstream::in);
 
 	if(!ifstr.good()){
-		std::cerr << "Problem opening the monster name file" << std::endl;
+		//if we can't find the monster list, fall back to the parent directory
+		ifstr.open("../MonsterNameList.txt",std::ifstream::in);
+		if (!ifstr.good()) {
+			//couldn't find the monster list in the working or parent dir
+			std::cerr << "Problem opening the monster name file" << std::endl;
+		}
 	}
 
 	std::string line, name, type;
@@ -29,6 +34,7 @@ Dungeon::Dungeon(std::string playerName){
 
 	unsigned int i = 0;
 	
+	//load in monster names and corresponding types line by line from MonsterNameList.txt
 	while(getline(ifstr, line)){
 		name = line.substr(0, line.find(delim));
 		type = line.substr(line.find(delim) + 2, line.size());
