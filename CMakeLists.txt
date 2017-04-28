@@ -15,4 +15,7 @@ set(SOS_SOURCES
         src/Skill.cpp
         src/Usable.cpp)
 
-add_executable(sos_game ${PROJECT_SOURCE_DIR}/src/main.cpp ${SOS_SOURCES})
+set(SOS_SKILLS
+        src/skills/SkillHack.cpp)
+
+add_executable(sos_game ${PROJECT_SOURCE_DIR}/src/main.cpp ${SOS_SOURCES} ${SOS_SKILLS})
