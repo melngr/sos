@@ -42,6 +42,7 @@ void Entity::updateDefense(int def) { _defense = def; }
 //Entity toString -- output this Entity's current stats
 std::ostream& operator<<(std::ostream& ostr, const Entity& e){
 	ostr << std::endl << std::endl;
+	ostr << "in entity" << std::endl;
 	ostr << "Printing a " << e.getClassType(ostr) << ": " <<std::endl;
 	ostr << "Rawr! I am a " << e._name << std::endl;
 	ostr << "HP: " << e._stamina << "\tATT: " << e._attack << std::endl;

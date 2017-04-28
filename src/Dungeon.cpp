@@ -69,6 +69,8 @@ std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 
 //move currDay to the next day of the week
 void Dungeon::progressToNextDay(){
+	daysPassed+=1;
+	generateMonster();
 	currDay->moveForwardOneDay();
 }
 
@@ -87,16 +89,15 @@ void Dungeon::subtractHrs(float numHrs){
 }
 
 //create new monster stats (currently health, attack, and defense) scaled based on current day 
-void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int& monsterHp){
+void Dungeon::scaleStats(std::string& name, int& monsterAtt, int& monsterDef, int& monsterHp){
 	//based on days passed higher as more days pass.
 	int base = 100;
 	monsterHp = base + daysPassed*2;
 	monsterAtt = 5 + ceil(daysPassed*(0.33));
 	monsterDef = 0 + ceil(daysPassed*1.2);
-	int nameInd = 0;
-	//int nameInd = rand() % std::min(daysPassed, MONSTER_ARRAY_SIZE);
+	int minSize = ( daysPassed < MONSTER_ARRAY_SIZE ? daysPassed : MONSTER_ARRAY_SIZE);
+	int nameInd = rand()%  minSize;//std::max(daysPassed)//, Dungeon::MONSTER_ARRAY_SIZE);
 	name = monsterNames[nameInd];
-
 }
 
 //create a new monster of a randomly chosen id
@@ -105,4 +106,5 @@ void Dungeon::generateMonster(){
 	std::string name;
 	scaleStats(name, monsterAtt, monsterDef, monsterHp);
 	currDay->setMonster(name, monsterAtt, monsterDef, monsterHp);
+	currDay->currentMonster_->getName();
 }

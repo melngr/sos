@@ -22,12 +22,14 @@ public:
 	~Dungeon() { 
 		delete currDay; 
 		delete [] monsterTypes; 
+		delete [] monsterNames; 
 		delete player_; 
 	};
 
 	//Day object accessors
 	std::string getDay() { return currDay->getDayStr(); }
 	Monster* getMonster() { return currDay->currentMonster_; }
+	int getDaysPassed() {return daysPassed; }
 	float numHrs() {return currDay->hoursOfDay_;}
 
 	void subtractHrs(float numHrs);
@@ -48,7 +50,7 @@ protected:
 
 	void progressToNextDay(); //moves to the next day, likely called from subtract hours
 	void generateMonster(); //likely called from progressToNextDay
-	void scaleStats(std::string name, int& monsterAtt, int& monsterDef, int& monsterHp);
+	void scaleStats(std::string& name, int& monsterAtt, int& monsterDef, int& monsterHp);
 
 };
 #endif

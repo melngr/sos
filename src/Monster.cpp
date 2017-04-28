@@ -29,7 +29,7 @@ int Monster::useItem(int index) {
 
 //Monster toString -- output current attributes
 std::ostream& operator<<(std::ostream& ostr, const Monster& m){
-	ostr << "Printing a monster: " <<std::endl;
+	ostr << "Printing a monster: " << std::endl;
 	ostr << "Rawr! I am a " << m._name << std::endl;
 	ostr << "HP: " << m._stamina << "\tATT: " << m._attack << std::endl;
 	ostr << "Good Luck defeating me" << std::endl;
