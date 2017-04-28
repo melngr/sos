@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <algorithm>
+#include <math.h>
 
 #include "Dungeon.h"
 
@@ -20,12 +21,19 @@ Dungeon::Dungeon(std::string playerName){
 		std::cerr << "Problem opening the monster name file" << std::endl;
 	}
 
-	std::string name;
+	std::string line, name, type;
+	std::string delim = ", ";
+	
+	monsterNames = new std::string[MONSTER_ARRAY_SIZE];
 	monsterTypes = new std::string[MONSTER_ARRAY_SIZE];
 
 	unsigned int i = 0;
-	while(getline(ifstr, name)){
-		monsterTypes[i] = name;
+	
+	while(getline(ifstr, line)){
+		name = line.substr(0, line.find(delim));
+		type = line.substr(line.find(delim) + 2, line.size());
+		monsterNames[i] = name;
+		monsterTypes[i] = type;
 		i+=1;
 	}
 
@@ -41,7 +49,7 @@ std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 	ostr << "daysPassed: " << d.daysPassed << std::endl;
 	ostr << "Monsters Stored: " << std::endl; 
 	for(int i = 0; i < d.MONSTER_ARRAY_SIZE; i++){
-		ostr << d.monsterTypes[i] << std::endl;
+		ostr << d.monsterNames[i] << " " << d.monsterTypes[i] << std::endl;
 	}
 	ostr << "Player: " << *(d.player_) << std::endl;
 
@@ -56,6 +64,8 @@ void Dungeon::subtractHrs(float numHrs){
 	float& currHrs = currDay->hoursOfDay_;
 	if(numHrs >= currHrs){
 		float remainder = numHrs - currHrs;
+		//TODO: if we want to allow skipping days through activities we need to make sure a monster is generated
+		//and then then stored(we only should need to auto store if remainder >= 24)
 		progressToNextDay(); //make day move to the next day
 		subtractHrs(remainder);
 	}else{
@@ -67,11 +77,11 @@ void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int
 	//based on days passed higher as more days pass.
 	int base = 100;
 	monsterHp = base + daysPassed*2;
-	monsterAtt = 5 + daysPassed*(0.3);
-	monsterDef = 0 + daysPassed*1.1;
+	monsterAtt = 5 + ceil(daysPassed*(0.33));
+	monsterDef = 0 + ceil(daysPassed*1.2);
 	int nameInd = 0;
 	//int nameInd = rand() % std::min(daysPassed, MONSTER_ARRAY_SIZE);
-	name = monsterTypes[nameInd];
+	name = monsterNames[nameInd];
 
 }
 
