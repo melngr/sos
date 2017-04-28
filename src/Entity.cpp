@@ -12,6 +12,7 @@
 #include "Monster.h"
 #include "Entity.h"
 
+//Entity class; stores attributes of entity objects (currently name, stamina, attack, and defense)
 Entity::Entity(std::string name) {
 	_name = name;
 	_stamina = 0;
@@ -19,9 +20,11 @@ Entity::Entity(std::string name) {
 	_defense = 0;
 }
 
+//virtual Entity destructor; to be implemented by children
 Entity::~Entity() {
 }
 
+//public attribute getters
 std::string Entity::getName() {	return _name; }
 int Entity::getStamina() { return _stamina; }
 int Entity::getAttack() { return _attack; }
@@ -30,11 +33,13 @@ int Entity::getDefense() { return _defense; }
 std::string Entity::getClassType(std::ostream& ostr) const{ return "Entity";}
 std::string Entity::getNonBasicInfo(std::ostream& ostr) const { return "I simply exist";}
 
+//public attribute setters
 void Entity::updateName(std::string name) { _name = name; }
 void Entity::updateStamina(int stam) { _stamina = stam; }
 void Entity::updateAttack(int atk) { _attack = atk; }
 void Entity::updateDefense(int def) { _defense = def; }
 
+//Entity toString -- output this Entity's current stats
 std::ostream& operator<<(std::ostream& ostr, const Entity& e){
 	ostr << std::endl << std::endl;
 	ostr << "Printing a " << e.getClassType(ostr) << ": " <<std::endl;

@@ -3,9 +3,10 @@
 #include <iostream>
 #include "Day.h"
 
-
+//hard-coded ordered list of the days of the week
 const std::string Day::daysOfWeek_[WEEK_LENGTH] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
+//Day toString -- output current day and monster
 std::ostream& operator<<(std::ostream& ostr, const Day& d){
 	ostr << "PRINTING DAY OBJECT" << std::endl;
 	ostr << "Hours Remaining: " << d.hoursOfDay_ << std::endl;
@@ -16,4 +17,5 @@ std::ostream& operator<<(std::ostream& ostr, const Day& d){
 		ostr << (d.daysOfWeek_)[i] << std::endl;
 	}
 	ostr<<"END OF DAY OBJECT" << std::endl;
+	return ostr;
 };
