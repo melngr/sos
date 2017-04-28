@@ -16,6 +16,7 @@
 #include "Entity.h"
 #include "Skill.h"
 #include "Usable.h"
+#include "Item.h"
 
 class Player : public Entity {
 public:
@@ -40,7 +41,7 @@ private:
 	//Skill and Item stored in a vector
 	std::vector<Skill*> _equippedSkills;
 	std::vector<Skill*> _skills;
-	//std::vector<Item*> _items;
+	std::vector<Item*> _items;
 	//hack something together, iterative function, recursive function, refactor generally, dynamic programming, linear programming
 	//sleep on it!, google, play solitaire, browse youtube, write black box tests (gives a bonus if used early?), white box testing (late fight)
 	//video games (rarely a good idea but inspiration can strike), dfs, bfs, djikstras
