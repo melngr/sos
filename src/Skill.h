@@ -18,12 +18,12 @@ public:
 	Skill(std::string name, int maxuses);
 	~Skill();
 
+	void refeshSkills();
 	virtual int use(int statvalue);
 	void discard();
-	std::string getClassType() {return "Skill"; };
+	virtual std::string getClassType() {return "Skill"; };
 	
 private:
-
 };
 
 #endif
