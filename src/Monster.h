@@ -19,6 +19,15 @@
 class Monster : public  Entity {
 public:
 	//give the Monster a name
+	/*
+		param name: the name of the monster
+		requires: true
+		modifies: this
+		effects: makes a new monster with the name. 
+
+		I think this isn't going to work if we have sub
+		classes with a type because we would need to pass that as well
+	*/
 	Monster(std::string name);
 	~Monster();
 
@@ -30,7 +39,15 @@ public:
 	}; //returns anything specific to a given class as a string used in operator<<
 
 
-	//use Skill
+	/*
+		param: index, the index of the skill in the vector. 
+		@modifies: depends on the type of skill, none or this
+		requires: 
+
+		May want to change
+		this into a map or set. That way we just need the name and it's super close
+		to cnst time b/c of the prob relatively small size of skills
+	*/
 	int useSkill(int index);
 	int useItem(int index);
 

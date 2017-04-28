@@ -14,7 +14,8 @@ public:
 	Day() {
 		hoursOfDay_ = HOURS_IN_A_DAY; 
 		currDayInd_ = 0;
-		currentMonster_ = new Monster("");
+		currentMonster_ = new Monster("eibooN");
+		currentMonster_->setStats(1, 0, 20);
 	};
 
 	~Day() { delete currentMonster_; }

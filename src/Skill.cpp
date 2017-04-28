@@ -9,13 +9,20 @@
 
 #include "Skill.h"
 
+//Skill class; stores basic attributes about this skill (currently name and max #uses)
 Skill::Skill(std::string name, int maxuses) : Usable(name, maxuses) {
 }
 
+//delete any data that the Skill class put on the heap (currently nothing to delete)
 Skill::~Skill() {
 }
 
-int Skill::use(int inputval) {
+void Skill::refeshSkills() {
+	_uses = _maxuses;
+}
+
+//use this skill as specified by inputVal
+int Skill::use(int statvalue) {
 	if (_uses <= 0) {
 		return -1;
 	}
@@ -24,6 +31,7 @@ int Skill::use(int inputval) {
 	return 0;
 }
 
+//destroy this skill
 void Skill::discard() {
 	delete(this);
 }
