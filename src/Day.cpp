@@ -16,4 +16,5 @@ std::ostream& operator<<(std::ostream& ostr, const Day& d){
 		ostr << (d.daysOfWeek_)[i] << std::endl;
 	}
 	ostr<<"END OF DAY OBJECT" << std::endl;
+	return ostr;
 };

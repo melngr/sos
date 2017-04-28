@@ -29,4 +29,5 @@ std::ostream& operator<<(std::ostream& ostr, const Monster& m){
 	ostr << "HP: " << m._stamina << "\tATT: " << m._attack << std::endl;
 	ostr << "Good Luck defeating me" << std::endl;
 	ostr << "done printing the monster!" << std::endl;
+	return ostr;
 }

@@ -54,6 +54,8 @@ std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 	ostr << "Player: " << *(d.player_) << std::endl;
 
 	ostr << "END OF DUNGEON OBJECT" << std::endl;
+	
+	return ostr;
 }
 
 void Dungeon::progressToNextDay(){
