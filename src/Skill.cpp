@@ -18,7 +18,7 @@ Skill::~Skill() {
 }
 
 //use this skill as specified by inputVal
-int Skill::use(int inputval) {
+int Skill::use(int statvalue) {
 	if (_uses <= 0) {
 		return -1;
 	}
