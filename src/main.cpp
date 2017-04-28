@@ -18,6 +18,12 @@
 int main(int argc, char** argv) {
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
 	std::cout << "Currently an active project for CSCI2963" << std::endl;
+
+	dungeonSetupTest();
+	return 0;
+}
+
+void dungeonSetupTest(){
 	std::string playerName;
 	std::cout << "Please enter a name:" << std::endl;
 	std::cin >> playerName;
@@ -48,6 +54,4 @@ int main(int argc, char** argv) {
 	d.subtractHrs(10);
 	std::cout << d.numHrs() << std::endl;
 	std::cout << d << std::endl;
-	
-	return 0;
 }

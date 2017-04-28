@@ -16,15 +16,15 @@ public:
 	Entity(std::string name);
 	virtual ~Entity();
 
-	//accessors for debugging/calculations elsewhere
-	std::string getName(); 
+	//accessors for debugging/calculations elsewhere, returns the attribute in the name
+	std::string getName();  
 	int getStamina();
 	int getAttack();
 	int getDefense();
 	virtual std::string getClassType(std::ostream& ostr) const; //return classname as str
 	virtual std::string getNonBasicInfo(std::ostream& ostr) const; //returns anything specific to a given class as a string used in operator<<
 
-	//mutators for updates
+	//mutators for updates, modifes the given attribute to be equal to the passed param
 	void updateName(std::string name);
 	void updateStamina(int stam);
 	void updateAttack(int atk);
