@@ -44,6 +44,7 @@ public:
 private:
 	//Monster only has Skill vector
 	std::vector<Skill> _skills;
+	//std::vector<Skill> _weaknesses;
 };
 
 #endif

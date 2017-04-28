@@ -1,15 +1,15 @@
-Hello World Program
-Enviroment Setup
-Iterative Intro
-Recursive Intro
-Memory Leaks
-Seg Faults
-Dynamicly Allocate Memory
-Vector Problem
-Linked Lists Problem
-Tree Problem
-Spaghetti Code
-God Class
-Extra large function
-Nonsense Variables
-Dead Code
+Hello World Program, GCM
+Enviroment Setup, GCM
+Iterative Intro, GCM
+Recursive Intro, GCM
+Memory Leaks, GCM
+Seg Faults, GCM
+Dynamicly Allocate Memory, GCM
+Vector Problem, GCM
+Linked Lists Problem, GCM
+Tree Problem, GCM
+Spaghetti Code, APM
+God Class, APM
+Extra large function, APM
+Nonsense Variables, GCM
+Dead Code, APM

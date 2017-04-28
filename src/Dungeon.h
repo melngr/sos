@@ -41,7 +41,8 @@ protected:
 
 	Day* currDay;
 	int daysPassed;
-	std::string* monsterTypes;
+	std::string* monsterNames;
+	std::string* monsterTypes;//correlates directly with names Mtype[0] goes with MName[0]
 	std::vector<Monster*> pastMonsters;
 	Player* player_;
 
