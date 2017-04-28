@@ -10,6 +10,7 @@
 #include <iomanip>
 #include "Player.h"
 
+//Player class: stores the player's name and Entity attributes
 Player::Player(std::string name) : Entity(name) {
 }
 
@@ -19,16 +20,17 @@ Player::~Player() {
 	}
 }
 
+//instruct the player to use the skill specified by input index
 int Player::useSkill(int index) {
 	return 0;
 }
 
+//instruct the player to use the item specified by input index
 int Player::useItem(int index) {
 	return 0;
 }
 
-
-
+//compile a string of advanced Player class information
 std::string Player::getNonBasicInfo(std::ostream& ost) const {
 	int colWidth = 15;
 	//int count = 0;

@@ -12,6 +12,7 @@
 
 #include "Dungeon.h"
 
+//Dungeon class; maintains day/time and handles all entities within the dungeon
 Dungeon::Dungeon(std::string playerName){
 	currDay = new Day(); 
 	daysPassed = 0;
@@ -40,15 +41,17 @@ Dungeon::Dungeon(std::string playerName){
 		type = line.substr(line.find(delim) + 2, line.size());
 		monsterNames[i] = name;
 		monsterTypes[i] = type;
-		i+=1;
+		++i;
 	}
 
+	//make sure we successfully populated our monster data arrays from the monster list file
 	assert(i == MONSTER_ARRAY_SIZE);
 
 	player_ = new Player(playerName);
 	//srand(time(NULL)); // generate a random seed
 }
 
+//Dungeon toString -- output basic info about the day and player progress
 std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 	ostr << std::endl << "PRINTING DUNGEON" << std::endl << std::endl;
 	ostr << "Day: " << *(d.currDay) << std::endl;
@@ -64,10 +67,12 @@ std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
 	return ostr;
 }
 
+//move currDay to the next day of the week
 void Dungeon::progressToNextDay(){
 	currDay->moveForwardOneDay();
 }
 
+//decrease currHrs by input numHrs; if currHours reaches 0, move to the next day
 void Dungeon::subtractHrs(float numHrs){
 	float& currHrs = currDay->hoursOfDay_;
 	if(numHrs >= currHrs){
@@ -81,6 +86,7 @@ void Dungeon::subtractHrs(float numHrs){
 	}
 }
 
+//create new monster stats (currently health, attack, and defense) scaled based on current day 
 void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int& monsterHp){
 	//based on days passed higher as more days pass.
 	int base = 100;
@@ -93,6 +99,7 @@ void Dungeon::scaleStats(std::string name, int& monsterAtt, int& monsterDef, int
 
 }
 
+//create a new monster of a randomly chosen id
 void Dungeon::generateMonster(){
 	int monsterHp, monsterAtt, monsterDef;
 	std::string name;
