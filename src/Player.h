@@ -28,7 +28,7 @@ public:
 		return "Player"; 
 	}; //return classname as str
 	std::string getNonBasicInfo(std::ostream& ost) const; //returns anything specific to a given class as a string used in operator<<
-	int numSkills() {return _skills.size(); }; 
+	int numSkills() {return (int)_skills.size(); };
 	//use Skill or Item from members
 	int useSkill(int index);
 	int useItem(int index);
