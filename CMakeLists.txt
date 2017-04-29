@@ -6,6 +6,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 set(SOS_SOURCES
+        src/Combat.cpp
         src/Day.cpp
         src/Dungeon.cpp
         src/Entity.cpp
