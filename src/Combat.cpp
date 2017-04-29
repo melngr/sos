@@ -18,16 +18,16 @@ void Combat::playerTurn(std::ostream& ostr) {
 	std::string action = "";
 	ostr << "Player Turn!" << std::endl;
 	ostr << "What will you do?" << std::endl
-	     << "Show info [i]" << std::endl
-	     << "Use skill [s]" << std::endl
-	     << "Procrastinate [f]" << std::endl
+	     << "Show info [u]" << std::endl
+	     << "Use skill [i]" << std::endl
+	     << "Procrastinate [o]" << std::endl
 	     << "Pass turn [p]" << std::endl;
 	std::cin >> action;
 	while (true) {
-		if (action == "i") {
+		if (action == "u") {
 			_player->getNonBasicInfo(ostr);
 		}
-		else if (action == "s") {
+		else if (action == "i") {
 			int skillchoice;
 			ostr << "What skill?" << std::endl;
 			std::cin >> skillchoice;
@@ -38,7 +38,7 @@ void Combat::playerTurn(std::ostream& ostr) {
 				break;
 			}
 		}
-		else if (action == "f") {
+		else if (action == "o") {
 			ostr << "Took a break :)" << std::endl;
 		}
 		else if (action == "p"){
@@ -55,8 +55,6 @@ void Combat::playerTurn(std::ostream& ostr) {
 
 void Combat::monsterTurn(std::ostream& ostr) {
 	ostr << "Monster Turn!" << std::endl;
-	//random generate number to call monster skill
-	//inflict damage to player
 }
 
 bool Combat::engageCombat(std::ostream& ostr) {
