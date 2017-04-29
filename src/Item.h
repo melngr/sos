@@ -4,7 +4,7 @@
 #include <string>
 #include "Usable.h"
 
-class Item : Usable {
+class Item : public Usable {
 public:
 	Item(std::string name, int maxuses);
 	~Item();
