@@ -28,11 +28,7 @@ int main(int argc, char** argv) {
 	std::cin >> playerName;
 	Dungeon dastardlyDungeon(playerName);
 
-	/* 
-	 *  This is a paragraph, so I think it looks cleaner if we do it like 
-	 *  this. I also tried to shorten the length of the lines a little to 
-	 *  make it prettier in the terminal.
-	 */
+	//cleaned up paragraph
 	std::cout << 
 		std::endl << "Welcome to SOS, " << playerName << ", the world in which you are the" << 
 		std::endl << "programmer and your groupmates are trying their best but are" <<
@@ -41,25 +37,12 @@ int main(int argc, char** argv) {
 		std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
 		std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
 	
-	/* 
-	 *  I had Andrew (he's my roommate, Ryan) test out the game. His 
-	 *  biggest complaint was not knowing what to type for action. I also 
-	 *  added a "Help" and "Quit" command. We can get rid of the quit 
-	 *  if you think it's better to not have it.
-	 */
 	std::cout << std::endl << "These are your options for input:" << std::endl <<
 		"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
 		"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
 		"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
 		"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
 		"  \"Time\" or \"t\" -> print the current time info" << std::endl << std::endl;
-
-	// std::cout << "Welcome to SOS, " << playerName << " the world in which you are the programmer and your groupmates are" << std::endl;
-	// std::cout << "trying their best, but are only making your life harder." << std::endl;
-	// std::cout << "You need to pull off a good grade and fix all the code that they create. Whatever" << std::endl;
-	// std::cout << "free time you have is up to you to use to the utmost. Don't forget studying and free time" << std::endl;
-	// std::cout << "are important!" << std::endl << std::endl;
-	//dungeonSetupTest(playerName);
 	
 	run(dastardlyDungeon);
 	return 0;
@@ -67,19 +50,13 @@ int main(int argc, char** argv) {
 
 // ----------------------------------------------------------------
 
-/*
- *  Do we need this? I only saw it used in the "time" command. I changed 
- *  what it printed a little, and I don't really see a need for this.
- */
 void printTimeInfo(Dungeon& d){
 	std::cout << d.getDay() << " " << d.getDaysPassed() << " " << d.numHrs() << std::endl;
 }
 
 // ----------------------------------------------------------------
 
-/*
- *  Do we need this still?
- */
+//testing setup
 void dungeonSetupTest(std::string playerName){
 	Dungeon d(playerName);
 	d.addPlayerSkill("HI", 4);
