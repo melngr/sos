@@ -16,7 +16,8 @@ set(SOS_SOURCES
         src/Usable.cpp)
 
 set(SOS_ITEMS
-        )
+        src/items/ItemCoffee.cpp
+        src/items/ItemTextbook.cpp)
 
 set(SOS_MONSTERS
         )
