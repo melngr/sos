@@ -5,6 +5,7 @@
 #include "Skill.h"
 #include "Combat.h"
 
+//generate a Combat handler with the given Player and Monster
 Combat::Combat(Player *currentplayer, Monster *currentmonster) {
 	_player = currentplayer;
 	_monster = currentmonster;
@@ -14,6 +15,10 @@ Combat::Combat(Player *currentplayer, Monster *currentmonster) {
 Combat::~Combat() {
 }
 
+/**
+Player turn options are received with cin
+Users can choose several options from attacking to passing the turn
+*/
 void Combat::playerTurn(std::ostream& ostr) {
 	std::string action = "";
 	ostr << "Player Turn!" << std::endl;
@@ -53,10 +58,20 @@ void Combat::playerTurn(std::ostream& ostr) {
 	return;
 }
 
+/**
+Monster turns are managed by the game as weighted random selection of skills
+Monster objects cannot use Item
+*/
 void Combat::monsterTurn(std::ostream& ostr) {
 	ostr << "Monster Turn!" << std::endl;
 }
 
+/**
+Engage combat function called by Dungeon when the Player chooses to fight
+Alternates turns for Player and Monster calling the respective turn function
+
+Returns true when the Player wins and false if the Monster wins
+*/
 bool Combat::engageCombat(std::ostream& ostr) {
 	while ((_player->getStamina() > 0) && (_monster->getStamina() > 0)) {
 		if (_turn) {
