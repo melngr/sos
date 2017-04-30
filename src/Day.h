@@ -1,3 +1,9 @@
+/**
+Day class to handle new Monster
+Each Day can generate a new Monster which scales with the number created
+Managed by the Dungeon class
+*/
+
 #ifndef DAY_H
 #define DAY_H
 
