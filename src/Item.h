@@ -1,3 +1,8 @@
+/**
+Parent class for other items
+Inherits Usable traits from that class and adds a self destroy when _uses runs out
+*/
+
 #ifndef ITEM_H
 #define ITEM_H
 
