@@ -1,3 +1,10 @@
+/**
+Combat.h
+
+header for Combat handler in game
+manages Player and Monster objects with turn based combat
+*/
+
 #ifndef COMBAT_H
 #define COMBAT_H
 
@@ -17,8 +24,10 @@ public:
 	bool engageCombat(std::ostream& ostr);
 
 private:
+	//Player and Monster are dynamically allocated in the Dungeon
 	Player* _player;
 	Monster* _monster;
+	//Tracks turn
 	bool _turn;
 };
 
