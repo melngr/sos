@@ -1,3 +1,9 @@
+/**
+Book Item
+Child of Item which is one of the Usable class
+When consumed adds some defense to the Player
+*/
+
 #ifndef ITEMBOOK_H
 #define ITEMBOOK_H
 
