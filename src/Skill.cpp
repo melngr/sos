@@ -17,7 +17,7 @@ Skill::Skill(std::string name, int maxuses) : Usable(name, maxuses) {
 Skill::~Skill() {
 }
 
-void Skill::refeshSkills() {
+void Skill::refreshSkills() {
 	_uses = _maxuses;
 }
 

@@ -42,3 +42,11 @@ Release
 /.idea/
 /cmake-build-debug/
 /bin
+
+# ignore CMake build files and Visual Studio project files
+CMakeFiles
+*.cmake
+*.sln
+*.vcxproj
+*.vcxproj.filters
+CMakeCache.txt

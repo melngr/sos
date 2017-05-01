@@ -18,7 +18,7 @@ public:
 	Skill(std::string name, int maxuses);
 	~Skill();
 
-	void refeshSkills();
+	void refreshSkills();
 	virtual int use(int statvalue);
 	void discard();
 	virtual std::string getClassType() {return "Skill"; };
