@@ -12,11 +12,11 @@
 
 #include "Dungeon.h"
 
-//load Monster attributes from MonsterNameList.txt
-void Dungeon::loadMonsterData() {
-	//search recursively up directory tree for the MonsterNameList (max of 20 parent dirs)
+//attempt to load the specified file
+std::ifstream& Dungeon::readFile(char* inFileName) {
+	//search recursively up directory tree for the desired file (max of 20 parent dirs)
 	unsigned int parentDirNum = 0;
-	std::string dirStr = "MonsterNameList.txt";
+	std::string dirStr = inFileName;
 	std::ifstream ifstr(dirStr.c_str(),std::ifstream::in);
 
 	while ((!ifstr.good()) && parentDirNum < 20) {
@@ -30,6 +30,15 @@ void Dungeon::loadMonsterData() {
 		//couldn't find the monster list in the working directory or any parent directories
 		std::cerr << "Problem opening the monster name file" << std::endl;
 	}
+
+	return ifstr;
+}
+
+//load Monster attributes from MonsterNameList.txt
+void Dungeon::loadMonsterData() {
+	//attempt to load in MonsterNameList.txt
+	std::ifstream ifstr = readFile("MonsterNameList.txt");
+
 	std::string line, name, type;
 	std::string delim = ", ";
 
