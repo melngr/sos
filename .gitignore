@@ -47,6 +47,11 @@ Release
 CMakeFiles
 *.cmake
 *.sln
+.vs
 *.vcxproj
 *.vcxproj.filters
 CMakeCache.txt
+
+# Visual Studio database files
+*.db
+*.opendb

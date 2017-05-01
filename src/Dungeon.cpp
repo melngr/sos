@@ -12,29 +12,32 @@
 
 #include "Dungeon.h"
 
-//Dungeon class; maintains day/time and handles all entities within the dungeon
-Dungeon::Dungeon(std::string playerName){
-	currDay = new Day(); 
-	daysPassed = 0;
-	std::ifstream ifstr("MonsterNameList.txt",std::ifstream::in);
+//load Monster attributes from MonsterNameList.txt
+void Dungeon::loadMonsterData() {
+	//search recursively up directory tree for the MonsterNameList (max of 20 parent dirs)
+	unsigned int parentDirNum = 0;
+	std::string dirStr = "MonsterNameList.txt";
+	std::ifstream ifstr(dirStr.c_str(),std::ifstream::in);
 
-	if(!ifstr.good()){
-		//if we can't find the monster list, fall back to the parent directory
-		ifstr.open("../MonsterNameList.txt",std::ifstream::in);
-		if (!ifstr.good()) {
-			//couldn't find the monster list in the working or parent dir
-			std::cerr << "Problem opening the monster name file" << std::endl;
-		}
+	while ((!ifstr.good()) && parentDirNum < 20) {
+		dirStr = "../" + dirStr;
+		++parentDirNum;
+		ifstr.open(dirStr.c_str(),std::ifstream::in);
 	}
 
+	//verify that we found the file
+	if (!ifstr.good()) {
+		//couldn't find the monster list in the working directory or any parent directories
+		std::cerr << "Problem opening the monster name file" << std::endl;
+	}
 	std::string line, name, type;
 	std::string delim = ", ";
-	
+
 	monsterNames = new std::string[MONSTER_ARRAY_SIZE];
 	monsterTypes = new std::string[MONSTER_ARRAY_SIZE];
 
 	unsigned int i = 0;
-	
+
 	//load in monster names and corresponding types line by line from MonsterNameList.txt
 	while(getline(ifstr, line)){
 		name = line.substr(0, line.find(delim));
@@ -46,7 +49,13 @@ Dungeon::Dungeon(std::string playerName){
 
 	//make sure we successfully populated our monster data arrays from the monster list file
 	assert(i == MONSTER_ARRAY_SIZE);
+}
 
+//Dungeon class; maintains day/time and handles all entities within the dungeon
+Dungeon::Dungeon(std::string playerName){
+	currDay = new Day(); 
+	daysPassed = 0;
+	loadMonsterData();
 	player_ = new Player(playerName);
 	//srand(time(NULL)); // generate a random seed
 }

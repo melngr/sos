@@ -21,6 +21,8 @@ set(SOS_ITEMS
         src/items/ItemTextbook.cpp)
 
 set(SOS_MONSTERS
+		src/monsters/AntiPatternMonster.cpp
+		src/monsters/GenCodeMonster.cpp
         )
 
 set(SOS_SKILLS

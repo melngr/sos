@@ -1,9 +1,5 @@
-
-
-
 #ifndef DUNGEON_H
 #define DUNGEON_H
-
 
 #include <string>
 #include <vector>
@@ -12,8 +8,6 @@
 #include "Day.h"
 #include "Player.h"
 #include "Skill.h"
-
-
 
 class Dungeon {
 	static const int MONSTER_ARRAY_SIZE = 15;
@@ -48,6 +42,7 @@ protected:
 	std::vector<Monster*> pastMonsters;
 	Player* player_;
 
+	void loadMonsterData(); //loads in monster attributes from MonsterNameList.txt
 	void progressToNextDay(); //moves to the next day, likely called from subtract hours
 	void generateMonster(); //likely called from progressToNextDay
 	void scaleStats(std::string& name, int& monsterAtt, int& monsterDef, int& monsterHp);
