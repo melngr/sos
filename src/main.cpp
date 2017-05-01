@@ -87,6 +87,30 @@ void dungeonSetupTest(std::string playerName){
 	std::cout << d << std::endl;
 }
 
+//print all valid input commands to the console if requested
+void displayHelp() {
+	std::cout << "These are your options for input:" << std::endl <<
+					"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
+					"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
+					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
+					"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+}
+
+//ask for #hours to study, then increment time and gameState accordingly
+void study(Dungeon &d) {
+	unsigned int hrs;
+	std::cout << "For how many hours (between 0 and " << d.numHrs() << ")? ";
+	std::cin >> hrs;
+	while ( std::cin.fail() || hrs > d.numHrs() ) {
+		std::cout << "Invalid input!" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');
+		std::cin >> hrs;
+	}
+	// Post code
+	d.subtractHrs(hrs);
+}
+
 // ----------------------------------------------------------------
 
 /** Run the dungeon.
@@ -103,35 +127,36 @@ void run(Dungeon& d) {
 		std::cin >> cmd;
 		std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
 		
+		//if the player opts to fight, display monster info and increment dungeon time
 		if ( (cmd == "f") || (cmd == "fight") ) {
 			std::cout << *(d.getMonster()) << std::endl;
 			d.subtractHrs(24);
-		} else if ( (cmd == "h") || (cmd == "help") ) {
-			std::cout << "These are your options for input:" << std::endl << 
-				"  \"Fight\" or \"f\" -> fight a monster" << std::endl << 
-				"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl << 
-				"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl << 
-				"  \"Time\" or \"t\" -> print the current time info" << std::endl;
-		} else if ( (cmd == "q") || (cmd == "quit") ) {
+		}
+
+		//if the player asks for help, display the help commands
+		else if ( (cmd == "h") || (cmd == "help") ) {
+			displayHelp();
+		}
+
+		//if the player attempts to quit, break out of the main loop
+		else if ( (cmd == "q") || (cmd == "quit") ) {
 			break;
-		} else if ( (cmd == "s") || (cmd == "study") ) {
-			unsigned int hrs;
-			std::cout << "For how many hours (between 0 and " << d.numHrs() << ")? ";
-			std::cin >> hrs;
-			while ( std::cin.fail() || hrs > d.numHrs() ) {
-				std::cout << "Invalid input!" << std::endl;
-				std::cin.clear();
-				std::cin.ignore(10000, '\n');
-				std::cin >> hrs;
-			}
-			// Post code
-			d.subtractHrs(hrs);
-			continue;
-		} else if ( (cmd == "t") || (cmd == "time") ) {
+		}
+
+		//if the player attempts to study, ask for #hours and modify time and gameState accordingly
+		else if ( (cmd == "s") || (cmd == "study") ) {
+			study(d);
+		}
+
+		//if the player asks for the time, return the current day and #hours
+		else if ( (cmd == "t") || (cmd == "time") ) {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
 			std::cout << "Day " << d.getDaysPassed() << "out of 30, Hour " << (24 - d.numHrs()) << std::endl;
-		} else {
+		}
+
+		//ignore any other input, as we have exhausted all valid commands
+		else {
 			std::cout << "Unknown command" << std::endl;
 		}
 	}
