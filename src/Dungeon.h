@@ -42,7 +42,7 @@ protected:
 	std::vector<Monster*> pastMonsters;
 	Player* player_;
 
-	std::ifstream& readFile(char* inFileName); //attempt to load the specified file
+	void readFile(char* inFileName, std::ifstream &ifstr); //attempt to load the specified file
 	void loadMonsterData(); //loads in monster attributes from MonsterNameList.txt
 	void progressToNextDay(); //moves to the next day, likely called from subtract hours
 	void generateMonster(); //likely called from progressToNextDay
