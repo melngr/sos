@@ -19,37 +19,24 @@ void printTimeInfo(Dungeon& d);
 void run(Dungeon& d);   // I renamed it run because it seemed logical. NBD.
 
 int main(int argc, char** argv) {
-
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
 	std::cout << "Currently an active project for CSCI2963" << std::endl;
 
 	std::string playerName;
 	std::cout << "Please enter a name: ";
 	std::cin >> playerName;
+	std::cout << std::endl;
 	Dungeon dastardlyDungeon(playerName);
 
-	//cleaned up paragraph
-	std::cout << 
-		std::endl << "Welcome to SOS, " << playerName << ", the world in which you are the" << 
-		std::endl << "programmer and your groupmates are trying their best but are" <<
-		std::endl << "making your life harder. You need to pull off a good grade and" <<
-		std::endl << "and fix all of the code that they create. You'll be able to " <<
-		std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
-		std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
-	
-	std::cout << std::endl << "These are your options for input:" << std::endl <<
-		"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
-		"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
-		"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
-		"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
-		"  \"Time\" or \"t\" -> print the current time info" << std::endl << std::endl;
-	
+	displayStory(playerName);
+	displayHelp();
 	run(dastardlyDungeon);
 	return 0;
 }
 
 // ----------------------------------------------------------------
 
+//display the current day and time in Dungeon d
 void printTimeInfo(Dungeon& d){
 	std::cout << d.getDay() << " " << d.getDaysPassed() << " " << d.numHrs() << std::endl;
 }
@@ -87,10 +74,20 @@ void dungeonSetupTest(std::string playerName){
 	std::cout << d << std::endl;
 }
 
+void displayStory(std::string& playerName) {
+	std::cout << "Welcome to SOS, " << playerName << ", the world in which you are the" <<
+			std::endl << "programmer and your groupmates are trying their best but are" <<
+			std::endl << "making your life harder. You need to pull off a good grade and" <<
+			std::endl << "and fix all of the code that they create. You'll be able to " <<
+			std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
+			std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
+}
+
 //print all valid input commands to the console if requested
 void displayHelp() {
 	std::cout << "These are your options for input:" << std::endl <<
 					"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
+					"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
 					"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
 					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
 					"  \"Time\" or \"t\" -> print the current time info" << std::endl;
