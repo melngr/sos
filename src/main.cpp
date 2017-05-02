@@ -16,7 +16,7 @@
 
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
-void run(Dungeon& d);   // I renamed it run because it seemed logical. NBD.
+void run(Dungeon& d); 
 void printHelp();
 
 
@@ -30,7 +30,6 @@ int main(int argc, char** argv) {
 	std::cin >> playerName;
 	Dungeon dastardlyDungeon(playerName);
 
-	//cleaned up paragraph
 	std::cout << 
 		std::endl << "Welcome to SOS, " << playerName << ", the world in which you are the" << 
 		std::endl << "programmer and your groupmates are trying their best but are" <<
