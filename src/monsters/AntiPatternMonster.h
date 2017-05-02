@@ -23,23 +23,15 @@ public:
 	AntiPatternMonster(std::string name);
 	~AntiPatternMonster();
 
+	//return classname as str
 	std::string getClassType(std::ostream& ostr) const {
 		return "AntiPatternMonster"; 
-	}; //return classname as str
+	};
+
+	//returns anything specific to a given class as a string used in operator<<
 	std::string getNonBasicInfo(std::ostream& ostr) const { 
 		return "good luck defeating me!";
-	}; //returns anything specific to a given class as a string used in operator<<
-
-
-	//use Skill
-	int useSkill(int index);
-	int useItem(int index);
-
-	void setStats(int att, int def, int hp){
-		_attack = att;
-		_defense = def;
-		_stamina = hp;
-	}
+	};
 
 private:
 	//Monster only has Skill vector
