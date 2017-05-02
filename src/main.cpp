@@ -16,7 +16,11 @@
 
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
-void run(Dungeon& d);   // I renamed it run because it seemed logical. NBD.
+void run(Dungeon& d);
+void study(Dungeon &d);
+void displayStory(std::string& playerName);
+void displayHelp();
+
 
 int main(int argc, char** argv) {
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
@@ -91,6 +95,8 @@ void displayHelp() {
 					"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
 					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
 					"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+	std::cout << "Note: If you don't fight a monster one day. It gets saved for you to fight" << std::endl
+				<<"later, but beware its stats will have increased! Don't wait too long!" << std::endl;
 }
 
 //ask for #hours to study, then increment time and gameState accordingly
@@ -149,7 +155,7 @@ void run(Dungeon& d) {
 		else if ( (cmd == "t") || (cmd == "time") ) {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
-			std::cout << "Day " << d.getDaysPassed() << "out of 30, Hour " << (24 - d.numHrs()) << std::endl;
+			std::cout << "Day " << d.getDaysPassed() << "out of 30, Hour " << (24 - d.numHrs()) << " of 24" std::endl;
 		}
 
 		//ignore any other input, as we have exhausted all valid commands
