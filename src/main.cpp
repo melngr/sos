@@ -14,6 +14,26 @@
 
 // ----------------------------------------------------------------
 
+//print out the introductory story info
+void displayStory(std::string& playerName) {
+	std::cout << "Welcome to SOS, " << playerName << ", the world in which you are the" <<
+		std::endl << "programmer and your groupmates are trying their best but are" <<
+		std::endl << "making your life harder. You need to pull off a good grade and" <<
+		std::endl << "and fix all of the code that they create. You'll be able to " <<
+		std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
+		std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
+}
+
+//print all valid input commands to the console if requested
+void displayHelp() {
+	std::cout << "These are your options for input:" << std::endl <<
+		"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
+		"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
+		"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
+		"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
+		"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+}
+
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
 void run(Dungeon& d);
@@ -98,7 +118,6 @@ void displayHelp() {
 	std::cout << "Note: If you don't fight a monster one day. It gets saved for you to fight" << std::endl
 				<<"later, but beware its stats will have increased! Don't wait too long!" << std::endl;
 }
-
 //ask for #hours to study, then increment time and gameState accordingly
 void study(Dungeon &d) {
 	unsigned int hrs;

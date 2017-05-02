@@ -1,5 +1,6 @@
 #include <string>
 #include "Item.h"
+#include <algorithm>
 
 //generate a new Item
 Item::Item(std::string name, int maxuses) : Usable(name, maxuses) {}
@@ -9,15 +10,9 @@ Item::~Item() {
 
 //only use Item if has available uses
 int Item::use(int consumed) {
-	if (consumed > _uses) {
-		_uses -= consumed;
-		return consumed;
-	}
-	else
-	{
-		_uses = 0;
-		return _uses;
-	}
+	int used = std::min(_uses,consumed);
+	_uses -= used;
+	return used;
 }
 
 //toss an Item
