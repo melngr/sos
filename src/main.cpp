@@ -17,6 +17,8 @@
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
 void run(Dungeon& d);   // I renamed it run because it seemed logical. NBD.
+void printHelp();
+
 
 int main(int argc, char** argv) {
 
@@ -37,12 +39,7 @@ int main(int argc, char** argv) {
 		std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
 		std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
 	
-	std::cout << std::endl << "These are your options for input:" << std::endl <<
-		"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
-		"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
-		"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
-		"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
-		"  \"Time\" or \"t\" -> print the current time info" << std::endl << std::endl;
+	printHelp();
 	
 	run(dastardlyDungeon);
 	return 0;
@@ -104,14 +101,11 @@ void run(Dungeon& d) {
 		std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
 		
 		if ( (cmd == "f") || (cmd == "fight") ) {
+			//TODO: implement actual mechanics
 			std::cout << *(d.getMonster()) << std::endl;
 			d.subtractHrs(24);
 		} else if ( (cmd == "h") || (cmd == "help") ) {
-			std::cout << "These are your options for input:" << std::endl << 
-				"  \"Fight\" or \"f\" -> fight a monster" << std::endl << 
-				"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl << 
-				"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl << 
-				"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+			printHelp();
 		} else if ( (cmd == "q") || (cmd == "quit") ) {
 			break;
 		} else if ( (cmd == "s") || (cmd == "study") ) {
@@ -124,13 +118,13 @@ void run(Dungeon& d) {
 				std::cin.ignore(10000, '\n');
 				std::cin >> hrs;
 			}
-			// Post code
+			// TODO: need to figure out how we modify player stats for studying
 			d.subtractHrs(hrs);
 			continue;
 		} else if ( (cmd == "t") || (cmd == "time") ) {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
-			std::cout << "Day " << d.getDaysPassed() << "out of 30, Hour " << (24 - d.numHrs()) << std::endl;
+			std::cout << "Day " << d.getDaysPassed() << " out of 30; Hour " << (24 - d.numHrs()) << std::endl;
 		} else {
 			std::cout << "Unknown command" << std::endl;
 		}
@@ -139,3 +133,12 @@ void run(Dungeon& d) {
 	std::cout << std::endl;
 }
 
+void printHelp(){
+	std::cout << "These are your options for input:" << std::endl << 
+				"  \"Fight\" or \"f\" -> fight a monster" << std::endl << 
+				"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl << 
+				"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl << 
+				"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+	std::cout << "Note: if you don't fight a monster and the day ends, then the monster" << std::endl
+			  << "is stored and you can fight it later. Beware, they get a bit stronger as time passes!" << std::endl;
+}
