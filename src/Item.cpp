@@ -10,9 +10,9 @@ Item::~Item() {
 
 //only use Item if has available uses
 int Item::use(int consumed) {
-	int returnVal = consumed + std::min(_uses-consumed,0);
-	_uses = std::max(_uses-consumed,0);
-	return returnVal;
+	int used = std::min(_uses,consumed);
+	_uses -= used;
+	return used;
 }
 
 //toss an Item
