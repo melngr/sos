@@ -11,28 +11,9 @@
 #include "Skill.h"
 #include "Usable.h"
 #include "Dungeon.h"
+#include "Combat.h"
 
 // ----------------------------------------------------------------
-
-//print out the introductory story info
-void displayStory(std::string& playerName) {
-	std::cout << "Welcome to SOS, " << playerName << ", the world in which you are the" <<
-		std::endl << "programmer and your groupmates are trying their best but are" <<
-		std::endl << "making your life harder. You need to pull off a good grade and" <<
-		std::endl << "and fix all of the code that they create. You'll be able to " <<
-		std::endl << "check the clock, fix their monstrous mistakes, and study. Time " <<
-		std::endl << "is yours to control, but use it carefully. Good Luck!" << std::endl;
-}
-
-//print all valid input commands to the console if requested
-void displayHelp() {
-	std::cout << "These are your options for input:" << std::endl <<
-		"  \"Fight\" or \"f\" -> fight a monster" << std::endl <<
-		"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
-		"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
-		"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
-		"  \"Time\" or \"t\" -> print the current time info" << std::endl;
-}
 
 void dungeonSetupTest(std::string playerName);
 void printTimeInfo(Dungeon& d);
@@ -40,7 +21,6 @@ void run(Dungeon& d);
 void study(Dungeon &d);
 void displayStory(std::string& playerName);
 void displayHelp();
-
 
 int main(int argc, char** argv) {
 	std::cout << "SOS! Surviving Open Source as a game experience" << std::endl;
@@ -152,7 +132,9 @@ void run(Dungeon& d) {
 		//if the player opts to fight, display monster info and increment dungeon time
 		if ( (cmd == "f") || (cmd == "fight") ) {
 			std::cout << *(d.getMonster()) << std::endl;
-			d.subtractHrs(24);
+			
+
+			//d.subtractHrs(24);
 		}
 
 		//if the player asks for help, display the help commands
@@ -174,7 +156,7 @@ void run(Dungeon& d) {
 		else if ( (cmd == "t") || (cmd == "time") ) {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
-			std::cout << "Day " << d.getDaysPassed() << "out of 30, Hour " << (24 - d.numHrs()) << " of 24" std::endl;
+			std::cout << "Day " << d.getDaysPassed() << " out of 30, Hour " << (24 - d.numHrs()) << " of 24" << std::endl;
 		}
 
 		//ignore any other input, as we have exhausted all valid commands
