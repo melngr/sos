@@ -23,6 +23,8 @@ public:
 	void monsterTurn(std::ostream& ostr);
 	bool engageCombat(std::ostream& ostr);
 
+	void setMonster(Monster* newMonster);
+
 private:
 	//Player and Monster are dynamically allocated in the Dungeon
 	Player* _player;

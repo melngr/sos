@@ -23,6 +23,7 @@ public:
 	//Day object accessors
 	std::string getDay() { return currDay->getDayStr(); }
 	Monster* getMonster() { return currDay->currentMonster_; }
+	Player* getPlayer() { return player_; }
 	int getDaysPassed() {return daysPassed; }
 	float numHrs() {return currDay->hoursOfDay_;}
 

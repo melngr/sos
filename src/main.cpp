@@ -96,7 +96,7 @@ void displayHelp() {
 					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
 					"  \"Time\" or \"t\" -> print the current time info" << std::endl;
 	std::cout << "Note: If you don't fight a monster one day. It gets saved for you to fight" << std::endl
-				<<"later, but beware its stats will have increased! Don't wait too long!" << std::endl;
+				<< "later, but beware its stats will have increased! Don't wait too long!" << std::endl;
 }
 //ask for #hours to study, then increment time and gameState accordingly
 void study(Dungeon &d) {
@@ -131,9 +131,8 @@ void run(Dungeon& d) {
 		
 		//if the player opts to fight, display monster info and increment dungeon time
 		if ( (cmd == "f") || (cmd == "fight") ) {
-			std::cout << *(d.getMonster()) << std::endl;
-			
-
+			Combat combatHandler(d.getPlayer(), d.getMonster());
+			combatHandler.engageCombat(std::cout);
 			//d.subtractHrs(24);
 		}
 

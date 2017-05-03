@@ -12,6 +12,10 @@
 
 //Player class: stores the player's name and Entity attributes
 Player::Player(std::string name) : Entity(name) {
+	_stamina = 100;
+	_attack = 2;
+	_defense = 0;
+	learnSkill("Hack Solution", 99999);
 }
 
 Player::~Player() {

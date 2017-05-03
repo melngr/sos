@@ -27,15 +27,16 @@ void Combat::playerTurn(std::ostream& ostr) {
 	     << "Use skill [i]" << std::endl
 	     << "Procrastinate [o]" << std::endl
 	     << "Pass turn [p]" << std::endl;
-	std::cin >> action;
 	while (true) {
+		std::cin >> action;
 		if (action == "u") {
-			_player->getNonBasicInfo(ostr);
+			ostr << _player->getNonBasicInfo(ostr);
 		}
 		else if (action == "i") {
 			int skillchoice;
-			ostr << "What skill?" << std::endl;
+			ostr << "What skill (type the name of one of your skills)?" << std::endl;
 			std::cin >> skillchoice;
+
 			int damage = _player->useSkill(skillchoice);
 
 			_monster->updateStamina(-damage);
@@ -75,8 +76,10 @@ Returns true when the Player wins and false if the Monster wins
 bool Combat::engageCombat(std::ostream& ostr) {
 	while ((_player->getStamina() > 0) && (_monster->getStamina() > 0)) {
 		if (_turn) {
+			ostr << "hi!" << std::endl;
 			playerTurn(ostr);
 			if (_monster->getStamina() <= 0) {
+				ostr << "You won the fight!" << std::endl;
 				return true;
 			}
 			_turn = false;
@@ -86,5 +89,10 @@ bool Combat::engageCombat(std::ostream& ostr) {
 			_turn = true;
 		}
 	}
+	ostr << "You lost the fight :(, you will suffer a grade penalty for this!" << std::endl;
 	return false;
+}
+
+void Combat::setMonster(Monster* newMonster){
+	_monster = newMonster;
 }

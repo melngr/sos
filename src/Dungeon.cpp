@@ -12,6 +12,16 @@
 
 #include "Dungeon.h"
 
+//Dungeon class; maintains day/time and handles all entities within the dungeon
+Dungeon::Dungeon(std::string playerName){
+	currDay = new Day(); 
+	daysPassed = 0;
+	loadMonsterData();
+	player_ = new Player(playerName);
+
+	//srand(time(NULL)); // generate a random seed
+}
+
 //attempt to load the specified file
 void Dungeon::readFile(char* inFileName, std::ifstream &ifstr) {
 	//search recursively up directory tree for the desired file (max of 20 parent dirs)
@@ -57,15 +67,6 @@ void Dungeon::loadMonsterData() {
 
 	//make sure we successfully populated our monster data arrays from the monster list file
 	assert(i == MONSTER_ARRAY_SIZE);
-}
-
-//Dungeon class; maintains day/time and handles all entities within the dungeon
-Dungeon::Dungeon(std::string playerName){
-	currDay = new Day(); 
-	daysPassed = 0;
-	loadMonsterData();
-	player_ = new Player(playerName);
-	//srand(time(NULL)); // generate a random seed
 }
 
 //Dungeon toString -- output basic info about the day and player progress
