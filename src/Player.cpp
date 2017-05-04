@@ -10,6 +10,20 @@
 #include <iomanip>
 #include "Player.h"
 
+//compare strings a and b, ignoring case sensitivity
+bool equalsIgnoreCase(const std::string& a, const std::string& b) {
+	unsigned int aSize = a.size();
+	if (b.size() != aSize) {
+		return false;
+	}
+	for (unsigned int i = 0; i < aSize; ++i) {
+		if (tolower(a[i]) != tolower(b[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
 //Player class: stores the player's name and Entity attributes
 Player::Player(std::string name) : Entity(name) {
 	_stamina = 100;
@@ -38,7 +52,7 @@ int Player::useItem(int index) {
 int Player::skillIndex(std::string skillName) {
 	int i = 0;
 	for (std::vector<Skill*>::iterator itr = _skills.begin(); itr != _skills.end(); ++itr, ++i) {
-		if ((*itr)->getName() == skillName) {
+		if (equalsIgnoreCase((*itr)->getName(),skillName)) {
 			return i;
 		}
 	}
