@@ -60,7 +60,7 @@ void Combat::playerTurn(std::ostream& ostr) {
 			}
 	
 			int damage = _player->useSkill(skillIndex);
-
+			std::cout << "DMG: " << damage << std::endl;
 			_monster->updateStamina(-damage);
 			if (_monster->getStamina() <= 0) {
 				break;
@@ -93,16 +93,22 @@ void Combat::monsterTurn(std::ostream& ostr) {
 Engage combat function called by Dungeon when the Player chooses to fight
 Alternates turns for Player and Monster calling the respective turn function
 
-Returns true when the Player wins and false if the Monster wins
+Returns 1 when the Player wins and 0 for a loss, and 2 if the fight never occurred (no time passes)
 */
-bool Combat::engageCombat(std::ostream& ostr) {
+int Combat::engageCombat(std::ostream& ostr) {
+	if(_monster->getStamina() == 0){
+		ostr << "Silly, You already beat this monster into the dust! You can't kill him twice. " << std::endl
+		 << "Try again tomorrow!" << std::endl;
+		return 2;
+	}
 	while ((_player->getStamina() > 0) && (_monster->getStamina() > 0)) {
 		if (_turn) {
 			ostr << "hi!" << std::endl;
 			playerTurn(ostr);
 			if (_monster->getStamina() <= 0) {
 				ostr << "You won the fight!" << std::endl;
-				return true;
+				_player->resetStamina();
+				return 1;
 			}
 			_turn = false;
 		}
@@ -111,8 +117,10 @@ bool Combat::engageCombat(std::ostream& ostr) {
 			_turn = true;
 		}
 	}
+	_monster->resetStamina();
+	_player->resetStamina();
 	ostr << "You lost the fight :(, you will suffer a grade penalty for this!" << std::endl;
-	return false;
+	return 0;
 }
 
 void Combat::setMonster(Monster* newMonster){

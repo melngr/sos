@@ -12,6 +12,7 @@
 #include "Usable.h"
 #include "Dungeon.h"
 #include "Combat.h"
+#include "ShapeFactory.h"
 #include "Utilities.h"
 
 // ----------------------------------------------------------------
@@ -95,12 +96,27 @@ void displayHelp() {
 					"  \"Help\" or \"h\" -> print a the command list" << std::endl <<
 					"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
 					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
-					"  \"Time\" or \"t\" -> print the current time info" << std::endl;
+					"  \"Time\" or \"t\" -> print the current time info" << std::endl <<
+					"  \"Procrastinate\" or \"p\" -> input a number greater than 0" << std::endl;
 	std::cout << "Note: If you don't fight a monster one day. It gets saved for you to fight" << std::endl
 				<< "later, but beware its stats will have increased! Don't wait too long!" << std::endl;
 }
 //ask for #hours to study, then increment time and gameState accordingly
 void study(Dungeon &d) {
+	unsigned int hrs;
+	std::cout << "For how many hours (between 0 and " << d.numHrs() << ")? ";
+	std::cin >> hrs;
+	while ( std::cin.fail() || hrs > d.numHrs() ) {
+		std::cout << "Invalid input!" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');
+		std::cin >> hrs;
+	}
+	// Post code
+	d.subtractHrs(hrs);
+}
+
+void procrastinate(Dungeon &d) {
 	unsigned int hrs;
 	std::cout << "For how many hours (between 0 and " << d.numHrs() << ")? ";
 	std::cin >> hrs;
@@ -132,9 +148,13 @@ void run(Dungeon& d) {
 		
 		//if the player opts to fight, display monster info and increment dungeon time
 		if ( cmd == "f" || cmd == "fight" ) {
+			std::cout << *(d.getPlayer()) <<  *(d.getMonster()) <<std::endl;
 			Combat combatHandler(d.getPlayer(), d.getMonster());
-			combatHandler.engageCombat(std::cout);
-			//d.subtractHrs(24);
+			int victory = combatHandler.engageCombat(std::cout);
+			if(victory != 2){
+				d.subtractHrs(6);
+			}
+			
 		}
 
 		//if the player asks for help, display the help commands
@@ -157,6 +177,10 @@ void run(Dungeon& d) {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
 			std::cout << "Day " << d.getDaysPassed() << " out of 30, Hour " << (24 - d.numHrs()) << " of 24" << std::endl;
+		}
+
+		else if (cmd == "p" || cmd == "procrastinate"){
+			procrastinate(d);
 		}
 
 		//ignore any other input, as we have exhausted all valid commands

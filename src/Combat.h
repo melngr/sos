@@ -22,7 +22,7 @@ public:
 	void playerTurn(std::ostream& ostr);
 	void displayOptions(std::ostream& ostr);
 	void monsterTurn(std::ostream& ostr);
-	bool engageCombat(std::ostream& ostr);
+	int engageCombat(std::ostream& ostr);
 
 	void setMonster(Monster* newMonster);
 

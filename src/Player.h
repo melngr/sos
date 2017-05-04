@@ -17,6 +17,7 @@
 #include "Skill.h"
 #include "Usable.h"
 #include "Item.h"
+#include "ShapeFactory.h"
 
 class Player : public Entity {
 public:
@@ -35,7 +36,8 @@ public:
 	int skillIndex(std::string skillName);
 
 	void learnSkill(std::string newSkill, int maxUses){
-		_skills.push_back(new Skill(newSkill, maxUses));
+		Skill* skill = SkillFactory::getSkill(newSkill);
+		_skills.push_back(skill);
 	}
 
 private:

@@ -19,7 +19,7 @@ public:
 	//accessors for debugging/calculations elsewhere, returns the attribute in the name
 	std::string getName();  
 	int getStamina();
-	int getAttack();
+	int getAttack() ;
 	int getDefense();
 	virtual std::string getClassType(std::ostream& ostr) const; //return classname as str
 	virtual std::string getNonBasicInfo(std::ostream& ostr) const; //returns anything specific to a given class as a string used in operator<<
@@ -29,6 +29,7 @@ public:
 	void updateStamina(int stam);
 	void updateAttack(int atk);
 	void updateDefense(int def);
+	void resetStamina() { _stamina = _startingStamina; };
 
 	//use Skill or Item
 	virtual int useSkill(int index) = 0;
@@ -38,6 +39,7 @@ public:
 
 protected:
 	//members of both Monster and Player
+	int _startingStamina; //this doesn't change for any given object. Used for resetting stamina
 	std::string _name;
 	int _stamina;
 	int _attack;

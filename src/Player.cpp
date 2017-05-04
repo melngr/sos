@@ -14,6 +14,7 @@
 //Player class: stores the player's name and Entity attributes
 Player::Player(std::string name) : Entity(name) {
 	_stamina = 100;
+	_startingStamina = _stamina;
 	_attack = 2;
 	_defense = 0;
 	learnSkill("Hack Solution", 99999);
@@ -27,7 +28,8 @@ Player::~Player() {
 
 //instruct the player to use the skill specified by input index
 int Player::useSkill(int index) {
-	return 0;
+	Skill* chosenSkill = _skills[index];
+	return chosenSkill->use(_attack);
 }
 
 //instruct the player to use the item specified by input index

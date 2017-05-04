@@ -18,6 +18,7 @@ Entity::Entity(std::string name) {
 	_stamina = 0;
 	_attack = 0;
 	_defense = 0;
+	_startingStamina = 0;
 }
 
 //virtual Entity destructor; to be implemented by children
@@ -35,7 +36,7 @@ std::string Entity::getNonBasicInfo(std::ostream& ostr) const { return "I simply
 
 //public attribute setters
 void Entity::updateName(std::string name) { _name = name; }
-void Entity::updateStamina(int stam) { _stamina = stam; }
+void Entity::updateStamina(int stam) { _stamina -= stam; }
 void Entity::updateAttack(int atk) { _attack = atk; }
 void Entity::updateDefense(int def) { _defense = def; }
 

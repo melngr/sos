@@ -2,9 +2,9 @@
 #define SKILLHACK_H
 
 #include <string>
-#include "Skill.h"
+#include "../Skill.h"
 
-class SkillHack : Skill {
+class SkillHack : public Skill {
 public:
 	SkillHack(std::string name, int maxuses);
 	~SkillHack();
