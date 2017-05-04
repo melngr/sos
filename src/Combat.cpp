@@ -12,6 +12,16 @@ Combat::Combat(Player *currentplayer, Monster *currentmonster) {
 	_turn = true;
 }
 
+//display the base options for the player's turn
+void Combat::displayOptions(std::ostream& ostr) {
+	ostr << "Player Turn!" << std::endl;
+	ostr << "What will you do?" << std::endl
+		<< "Show info [u]" << std::endl
+		<< "Use skill [i]" << std::endl
+		<< "Procrastinate [o]" << std::endl
+		<< "Pass turn [p]" << std::endl;
+}
+
 Combat::~Combat() {
 }
 
@@ -21,12 +31,7 @@ Users can choose several options from attacking to passing the turn
 */
 void Combat::playerTurn(std::ostream& ostr) {
 	std::string action = "";
-	ostr << "Player Turn!" << std::endl;
-	ostr << "What will you do?" << std::endl
-	     << "Show info [u]" << std::endl
-	     << "Use skill [i]" << std::endl
-	     << "Procrastinate [o]" << std::endl
-	     << "Pass turn [p]" << std::endl;
+	displayOptions(ostr);
 	while (true) {
 		std::cin >> action;
 		if (action == "u") {
@@ -49,7 +54,8 @@ void Combat::playerTurn(std::ostream& ostr) {
 			}
 			//if we opted to exit the skill selection menu (indicated by invalid skill selection) return to option select
 			if (skillIndex == -1) {
-				break;
+				displayOptions(ostr);
+				continue;
 			}
 	
 			int damage = _player->useSkill(skillIndex);
