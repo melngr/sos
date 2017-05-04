@@ -34,16 +34,22 @@ void Combat::playerTurn(std::ostream& ostr) {
 		}
 		else if (action == "i") {
 			std::string skillChoice;
-			int skillIndex;
+			int skillIndex = -1;
 			//loop until the player enters a valid skill name that they possess
 			while (true) {
-				ostr << "What skill (type the name of one of your skills)?" << std::endl;
+				ostr << "What skill (type the name of one of your skills, or q to cancel)?" << std::endl;
 				std::getline(std::cin, skillChoice);
-				std::cout << skillChoice << std::endl;
+				if (skillChoice == "q" || skillChoice == "quit") {
+					break;
+				}
 				skillIndex = _player->skillIndex(skillChoice);
 				if (skillIndex != -1) {
 					break;
 				}
+			}
+			//if we opted to exit the skill selection menu (indicated by invalid skill selection) return to option select
+			if (skillIndex == -1) {
+				break;
 			}
 	
 			int damage = _player->useSkill(skillIndex);
