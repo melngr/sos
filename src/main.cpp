@@ -131,29 +131,29 @@ void run(Dungeon& d) {
 		std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
 		
 		//if the player opts to fight, display monster info and increment dungeon time
-		if ( (equalsIgnoreCase(cmd, "f")) || (equalsIgnoreCase(cmd, "fight")) ) {
+		if ( cmd == "f" || cmd == "fight" ) {
 			Combat combatHandler(d.getPlayer(), d.getMonster());
 			combatHandler.engageCombat(std::cout);
 			//d.subtractHrs(24);
 		}
 
 		//if the player asks for help, display the help commands
-		else if ( (equalsIgnoreCase(cmd, "h")) || (equalsIgnoreCase(cmd, "help")) ) {
+		else if ( cmd == "h" || cmd == "help" ) {
 			displayHelp();
 		}
 
 		//if the player attempts to quit, break out of the main loop
-		else if ( (equalsIgnoreCase(cmd, "q")) || (equalsIgnoreCase(cmd, "quit")) ) {
+		else if ( cmd == "q" || cmd == "quit") {
 			break;
 		}
 
 		//if the player attempts to study, ask for #hours and modify time and gameState accordingly
-		else if ( (equalsIgnoreCase(cmd, "s")) || (equalsIgnoreCase(cmd, "study")) ) {
+		else if ( cmd == "s" || cmd == "study" ) {
 			study(d);
 		}
 
 		//if the player asks for the time, return the current day and #hours
-		else if ( (equalsIgnoreCase(cmd, "t")) || (equalsIgnoreCase(cmd, "time")) ) {
+		else if ( cmd == "t" || cmd == "time") {
 			// printTimeInfo(d);
 			// I think this will be a little more useful to the user.
 			std::cout << "Day " << d.getDaysPassed() << " out of 30, Hour " << (24 - d.numHrs()) << " of 24" << std::endl;
