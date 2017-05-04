@@ -14,7 +14,8 @@ set(SOS_SOURCES
         src/Monster.cpp
         src/Player.cpp
         src/Skill.cpp
-        src/Usable.cpp)
+        src/Usable.cpp
+		src/Utilities.cpp)
 
 set(SOS_ITEMS
         src/items/ItemCoffee.cpp
