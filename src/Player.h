@@ -17,7 +17,7 @@
 #include "Skill.h"
 #include "Usable.h"
 #include "Item.h"
-#include "ShapeFactory.h"
+#include "SkillFactory.h"
 
 class Player : public Entity {
 public:

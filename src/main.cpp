@@ -12,7 +12,7 @@
 #include "Usable.h"
 #include "Dungeon.h"
 #include "Combat.h"
-#include "ShapeFactory.h"
+#include "SkillFactory.h"
 #include "Utilities.h"
 
 // ----------------------------------------------------------------
