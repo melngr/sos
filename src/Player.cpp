@@ -34,6 +34,17 @@ int Player::useItem(int index) {
 	return 0;
 }
 
+//return the index of the skill named skillName, or -1 if the player does not possess that skill
+int Player::skillIndex(std::string skillName) {
+	int i = 0;
+	for (std::vector<Skill*>::iterator itr = _skills.begin(); itr != _skills.end(); ++itr, ++i) {
+		if ((*itr)->getName() == skillName) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 //compile a string of advanced Player class information
 std::string Player::getNonBasicInfo(std::ostream& ost) const {
 	int colWidth = 15;

@@ -33,11 +33,20 @@ void Combat::playerTurn(std::ostream& ostr) {
 			ostr << _player->getNonBasicInfo(ostr);
 		}
 		else if (action == "i") {
-			int skillchoice;
-			ostr << "What skill (type the name of one of your skills)?" << std::endl;
-			std::cin >> skillchoice;
-
-			int damage = _player->useSkill(skillchoice);
+			std::string skillChoice;
+			int skillIndex;
+			//loop until the player enters a valid skill name that they possess
+			while (true) {
+				ostr << "What skill (type the name of one of your skills)?" << std::endl;
+				std::getline(std::cin, skillChoice);
+				std::cout << skillChoice << std::endl;
+				skillIndex = _player->skillIndex(skillChoice);
+				if (skillIndex != -1) {
+					break;
+				}
+			}
+	
+			int damage = _player->useSkill(skillIndex);
 
 			_monster->updateStamina(-damage);
 			if (_monster->getStamina() <= 0) {

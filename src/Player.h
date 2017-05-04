@@ -32,6 +32,7 @@ public:
 	//use Skill or Item from members
 	int useSkill(int index);
 	int useItem(int index);
+	int skillIndex(std::string skillName);
 
 	void learnSkill(std::string newSkill, int maxUses){
 		_skills.push_back(new Skill(newSkill, maxUses));
