@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "Skill.h"
 #include "Combat.h"
+#include "Utilities.h"
 
 //generate a Combat handler with the given Player and Monster
 Combat::Combat(Player *currentplayer, Monster *currentmonster) {
@@ -34,17 +35,17 @@ void Combat::playerTurn(std::ostream& ostr) {
 	displayOptions(ostr);
 	while (true) {
 		std::cin >> action;
-		if (action == "u") {
+		if (equalsIgnoreCase(action,"u")) {
 			ostr << _player->getNonBasicInfo(ostr);
 		}
-		else if (action == "i") {
+		else if (equalsIgnoreCase(action, "i")) {
 			std::string skillChoice;
 			int skillIndex = -1;
 			//loop until the player enters a valid skill name that they possess
 			while (true) {
 				ostr << "What skill (type the name of one of your skills, or q to cancel)?" << std::endl;
 				std::getline(std::cin, skillChoice);
-				if (skillChoice == "q" || skillChoice == "quit") {
+				if (equalsIgnoreCase(skillChoice, "q") || equalsIgnoreCase(skillChoice,"quit")) {
 					break;
 				}
 				skillIndex = _player->skillIndex(skillChoice);
@@ -65,10 +66,10 @@ void Combat::playerTurn(std::ostream& ostr) {
 				break;
 			}
 		}
-		else if (action == "o") {
+		else if (equalsIgnoreCase(action,"o")) {
 			ostr << "Took a break :)" << std::endl;
 		}
-		else if (action == "p"){
+		else if (equalsIgnoreCase(action, "p")) {
 			ostr << "Giving up???" << std::endl;
 			break;
 		}
