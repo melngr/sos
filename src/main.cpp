@@ -97,7 +97,8 @@ void displayHelp() {
 					"  \"Quit\" or \"q\" -> quit the game before 30 days" << std::endl <<
 					"  \"Study\" or \"s\" -> input a number greater than 0" << std::endl <<
 					"  \"Time\" or \"t\" -> print the current time info" << std::endl <<
-					"  \"Procrastinate\" or \"p\" -> input a number greater than 0" << std::endl;
+					"  \"Procrastinate\" or \"p\" -> input a number greater than 0" << std::endl <<
+					"  \"Grade\" or \"g\" -> this is a measure of your success in this game" << std::endl;
 	std::cout << "Note: If you don't fight a monster one day. It gets saved for you to fight" << std::endl
 				<< "later, but beware its stats will have increased! Don't wait too long!" << std::endl;
 }
@@ -140,7 +141,7 @@ void procrastinate(Dungeon &d) {
  */
 void run(Dungeon& d) {
 	std::string cmd;
-	
+	float grade = 100;
 	while ( d.getDaysPassed() < 30 ) {
 		std::cout << "\nEnter what you want to do next: ";
 		std::cin >> cmd;
@@ -151,10 +152,17 @@ void run(Dungeon& d) {
 			std::cout << *(d.getPlayer()) <<  *(d.getMonster()) <<std::endl;
 			Combat combatHandler(d.getPlayer(), d.getMonster());
 			int victory = combatHandler.engageCombat(std::cout);
-			if(victory != 2){
+
+			if(victory != 2){ //
 				d.subtractHrs(6);
 			}
-			
+			if(victory == 0){ //lost fight, lose grade points
+				grade -= 5;
+			} else if(victory == 1) {
+				if(grade < 100){
+					grade += .5; //won fight, small bit of extra credit
+				}
+			}
 		}
 
 		//if the player asks for help, display the help commands
@@ -181,6 +189,10 @@ void run(Dungeon& d) {
 
 		else if (cmd == "p" || cmd == "procrastinate"){
 			procrastinate(d);
+		}
+
+		else if (cmd == "g" || cmd == "grade"){
+			std::cout << grade << "\%" <<  std::endl;
 		}
 
 		//ignore any other input, as we have exhausted all valid commands

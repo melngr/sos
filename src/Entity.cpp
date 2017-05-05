@@ -36,7 +36,7 @@ std::string Entity::getNonBasicInfo(std::ostream& ostr) const { return "I simply
 
 //public attribute setters
 void Entity::updateName(std::string name) { _name = name; }
-void Entity::updateStamina(int stam) { _stamina -= stam; }
+void Entity::updateStamina(int lostStam) { _stamina -= lostStam; }
 void Entity::updateAttack(int atk) { _attack = atk; }
 void Entity::updateDefense(int def) { _defense = def; }
 

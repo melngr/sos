@@ -33,7 +33,9 @@ Users can choose several options from attacking to passing the turn
 void Combat::playerTurn(std::ostream& ostr) {
 	std::string action = "";
 	displayOptions(ostr);
+
 	while (true) {
+		bool combatHappened = false;
 		std::cin >> action;
 		if (equalsIgnoreCase(action,"u")) {
 			ostr << _player->getNonBasicInfo(ostr);
@@ -42,7 +44,9 @@ void Combat::playerTurn(std::ostream& ostr) {
 			std::string skillChoice;
 			int skillIndex = -1;
 			//loop until the player enters a valid skill name that they possess
+			
 			while (true) {
+				combatHappened = true;
 				ostr << "What skill (type the name of one of your skills, or q to cancel)?" << std::endl;
 				std::getline(std::cin, skillChoice);
 				if (equalsIgnoreCase(skillChoice, "q") || equalsIgnoreCase(skillChoice,"quit")) {
@@ -61,8 +65,12 @@ void Combat::playerTurn(std::ostream& ostr) {
 	
 			int damage = _player->useSkill(skillIndex);
 			std::cout << "DMG: " << damage << std::endl;
-			_monster->updateStamina(-damage);
+			_monster->updateStamina(damage);
+			std::cout << "the monster has " << _monster->getStamina() << " health remaining" <<std::endl << std::endl;
 			if (_monster->getStamina() <= 0) {
+				break;
+			}
+			if(combatHappened){
 				break;
 			}
 		}
@@ -77,6 +85,7 @@ void Combat::playerTurn(std::ostream& ostr) {
 			ostr << "What?" << std::endl;
 			continue;
 		}
+		
 	}
 	return;
 }
@@ -86,7 +95,11 @@ Monster turns are managed by the game as weighted random selection of skills
 Monster objects cannot use Item
 */
 void Combat::monsterTurn(std::ostream& ostr) {
-	ostr << "Monster Turn!" << std::endl;
+	ostr << "Monster's Turn!" << std::endl;
+	ostr << "He attacks with aggravation and frustration and obfuscation!" << std::endl;
+	int dmg = _monster->getAttack()*1.5;
+	_player->updateStamina(dmg);
+	ostr << "Ouch, you have " << _player->getStamina() << " health remaining." << std::endl;
 }
 
 /**
@@ -103,7 +116,6 @@ int Combat::engageCombat(std::ostream& ostr) {
 	}
 	while ((_player->getStamina() > 0) && (_monster->getStamina() > 0)) {
 		if (_turn) {
-			ostr << "hi!" << std::endl;
 			playerTurn(ostr);
 			if (_monster->getStamina() <= 0) {
 				ostr << "You won the fight!" << std::endl;
