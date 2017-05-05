@@ -1,8 +1,7 @@
-/**
-Day class to handle new Monster
-Each Day can generate a new Monster which scales with the number created
-Managed by the Dungeon class
-*/
+/*  Day class to handle new Monster
+ *  Each Day can generate a new Monster which scales with the number created
+ *  Managed by the Dungeon class
+ */
 
 #ifndef DAY_H
 #define DAY_H
@@ -12,40 +11,40 @@ Managed by the Dungeon class
 #include <iostream>
 #include "Monster.h"
 
-
 class Day {
 	static const int HOURS_IN_A_DAY = 24;
 	static const int WEEK_LENGTH = 7;
+	static const std::string DAYS_OF_WEEK[WEEK_LENGTH];
+
 public: 
 	Day() {
-		hoursOfDay_ = HOURS_IN_A_DAY; 
-		currDayInd_ = 0;
-		currentMonster_ = new Monster("eibooN");
-		currentMonster_->setStats(1, 0, 20);
+		_hoursOfDay = HOURS_IN_A_DAY; 
+		_currDayInd = 0;
+		_currentMonster = new Monster("eibooN");
+		_currentMonster->setStats(1, 0, 20);
 	};
 
-	~Day() { delete currentMonster_; }
+	~Day() { delete _currentMonster; }
 	//for convenience
-	std::string getDayStr() { return daysOfWeek_[currDayInd_]; }
+	std::string getDayStr() { return DAYS_OF_WEEK[_currDayInd]; }
 	void moveForwardOneDay() { 
-		currDayInd_ = (currDayInd_ + 1) % WEEK_LENGTH;
-		hoursOfDay_ = HOURS_IN_A_DAY;
+		_currDayInd = (_currDayInd + 1) % WEEK_LENGTH;
+		_hoursOfDay = HOURS_IN_A_DAY;
 	}
 
-	friend std::ostream& operator<<(std::ostream& ostr, const Day& d); //doesn't actually need to be friend could've defined outside class
+	friend std::ostream& operator<<(std::ostream& ostr, const Day& d);
 
 	void setMonster(std::string mName, int att, int def, int hp){
-		delete currentMonster_; //no leak on prev days monster. Make sure that this is stored already if sleep on it was called
-		currentMonster_ = new Monster(mName);
-		currentMonster_->setStats(att, def, hp);
+		delete _currentMonster; //no leak on prev days monster. Make sure that this is stored already if sleep on it was called
+		_currentMonster = new Monster(mName);
+		_currentMonster->setStats(att, def, hp);
 	}
 
-	
 	//day info
-	float hoursOfDay_;
-	unsigned int currDayInd_; //0...6
-	static const std::string daysOfWeek_[WEEK_LENGTH]; //defined in cpp, cant make this use WEEK_LENGTH?
-	Monster* currentMonster_;
+	int _hoursOfDay;
+	unsigned int _currDayInd;   // 0 ... 6
+	Monster* _currentMonster;
 };
 
 #endif
+

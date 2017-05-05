@@ -1,53 +1,55 @@
 #ifndef DUNGEON_H
 #define DUNGEON_H
 
+#include <iostream>
 #include <string>
 #include <vector>
-#include "Monster.h"
-#include <iostream>
+
 #include "Day.h"
+#include "Monster.h"
 #include "Player.h"
 #include "Skill.h"
 
 class Dungeon {
 	static const int MONSTER_ARRAY_SIZE = 15;
+
 public:
 	Dungeon(std::string);
 	~Dungeon() { 
-		delete currDay; 
-		delete [] monsterTypes; 
-		delete [] monsterNames; 
-		delete player_; 
+		delete _currDay; 
+		delete [] _monsterTypes; 
+		delete [] _monsterNames; 
+		delete _player; 
 	};
 
-	//Day object accessors
-	std::string getDay() { return currDay->getDayStr(); }
-	Monster* getMonster() { return currDay->currentMonster_; }
-	Player* getPlayer() { return player_; }
-	int getDaysPassed() {return daysPassed; }
-	float numHrs() {return currDay->hoursOfDay_;}
+	// Day object accessors
+	std::string getDay() { return _currDay->getDayStr(); }
+	Monster* getMonster() { return _currDay->_currentMonster; }
+	Player* getPlayer() { return _player; }
+	int getDaysPassed() { return _daysPassed; }
+	int numHrs() { return _currDay->_hoursOfDay; }
 
-	void subtractHrs(float numHrs);
-	friend std::ostream& operator<<(std::ostream& ostr, const Dungeon& d);
-
+	void subtractHrs(int numHrs);
 	void addPlayerSkill(std::string newSkill, int maxuses){
-		player_->learnSkill(newSkill, maxuses);
+		_player->learnSkill(newSkill, maxuses);
 	}
 
-protected:
+	friend std::ostream& operator<<(std::ostream& ostr, const Dungeon& d);
 
-	Day* currDay;
-	int daysPassed;
-	std::string* monsterNames;
-	std::string* monsterTypes;//correlates directly with names Mtype[0] goes with MName[0]
-	std::vector<Monster*> pastMonsters;
-	Player* player_;
+protected:
+	Day* _currDay;
+	int _daysPassed;
+	std::string* _monsterNames;
+	std::string* _monsterTypes;   // correlates directly with names Mtype[0] goes with MName[0]
+	std::vector<Monster*> _pastMonsters;
+	Player* _player;
 
 	void readFile(char* inFileName, std::ifstream &ifstr); //attempt to load the specified file
-	void loadMonsterData(); //loads in monster attributes from MonsterNameList.txt
-	void progressToNextDay(); //moves to the next day, likely called from subtract hours
-	void generateMonster(); //likely called from progressToNextDay
+	void loadMonsterData();   // loads in monster attributes from MonsterNameList.txt
+	void progressToNextDay();   // moves to the next day, likely called from subtract hours
+	void generateMonster();   // likely called from progressToNextDay
 	void scaleStats(std::string& name, int& monsterAtt, int& monsterDef, int& monsterHp);
 
 };
 #endif
+

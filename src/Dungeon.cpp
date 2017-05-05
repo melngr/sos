@@ -1,128 +1,158 @@
-#include <string>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+// #include <algorithm>
 #include <cassert>
-#include <stdlib.h>
-#include <time.h>
-#include <stdio.h>
-#include <algorithm>
-#include <math.h>
+#include <cmath>
+#include <fstream>
+// #include <iostream>
+#include <sstream>
+// #include <string>
+// #include <vector>
 
 #include "Dungeon.h"
 
-//Dungeon class; maintains day/time and handles all entities within the dungeon
-Dungeon::Dungeon(std::string playerName){
-	currDay = new Day(); 
-	daysPassed = 0;
+/*  Default constructor.
+ *  @param playerName, string with user-inputted name for player
+ *  @effects Creates a new Dungeon object.
+ */
+Dungeon::Dungeon(std::string playerName) {
+	_currDay = new Day(); 
+	_daysPassed = 0;
+	_player = new Player( playerName );
 	loadMonsterData();
-	player_ = new Player(playerName);
-
-	//srand(time(NULL)); // generate a random seed
+	// srand(time(NULL));   // generate a random seed
 }
 
-//attempt to load the specified file
+/*  File loader.
+ *  @param inFileName, char* with file containing Monster names
+ *  @param ifstr, instream for reading file
+ *  @modifies ifstr, modified to read individual files
+ *  @effects Loads all monster information from 'inFileName'.
+ */
 void Dungeon::readFile(char* inFileName, std::ifstream &ifstr) {
-	//search recursively up directory tree for the desired file (max of 20 parent dirs)
+	// search up through directory to find file (max of 20 levels up)
 	unsigned int parentDirNum = 0;
 	std::string dirStr = inFileName;
 	ifstr.open(dirStr.c_str(),std::ifstream::in);
 
-	while ((!ifstr.good()) && parentDirNum < 20) {
+	while ( (!ifstr.good()) && (parentDirNum < 20) ) {
 		dirStr = "../" + dirStr;
 		++parentDirNum;
 		ifstr.open(dirStr.c_str(),std::ifstream::in);
 	}
 
-	//verify that we found the file
-	if (!ifstr.good()) {
-		//couldn't find the monster list in the working directory or any parent directories
-		std::cerr << "Problem opening the monster name file" << std::endl;
+	// verify that we found the file
+	if ( !ifstr.good() ) {
+		// error finding file within max directory search
+		std::cerr << "Problem opening monster name file: " << inFileName << std::endl;
 	}
 }
 
-//load Monster attributes from MonsterNameList.txt
+/*  Load Monster attributes.
+ *  @modifies _monsterNames, _monsterTypes
+ *  @effects Pulls in data from MonsterNamesList and loads into 
+ *           '_monsterNames' and '_monterTypes'
+ */
 void Dungeon::loadMonsterData() {
-	//attempt to load in MonsterNameList.txt
+	// attempt to load in MonsterNameList.txt
 	std::ifstream ifstr;
-	readFile("MonsterNameList.txt",ifstr);
+	char* file = (char*) ("MonterNameList.txt");
+	readFile(file, ifstr);
 
-	std::string line, name, type;
-	std::string delim = ", ";
+	std::string line, name, type, delim = ", ";
 
-	monsterNames = new std::string[MONSTER_ARRAY_SIZE];
-	monsterTypes = new std::string[MONSTER_ARRAY_SIZE];
+	_monsterNames = new std::string[MONSTER_ARRAY_SIZE];
+	_monsterTypes = new std::string[MONSTER_ARRAY_SIZE];
 
 	unsigned int i = 0;
 
-	//load in monster names and corresponding types line by line from MonsterNameList.txt
-	while(getline(ifstr, line)){
+	// load in names to '_monsterNames' and types to '_monsterTypes'
+	while ( getline(ifstr, line) ) {
 		name = line.substr(0, line.find(delim));
 		type = line.substr(line.find(delim) + 2, line.size());
-		monsterNames[i] = name;
-		monsterTypes[i] = type;
+		_monsterNames[i] = name;
+		_monsterTypes[i] = type;
 		++i;
 	}
 
-	//make sure we successfully populated our monster data arrays from the monster list file
-	assert(i == MONSTER_ARRAY_SIZE);
+	// assert that monster data arrays have length 'MONSTER_ARRAY_SIZE'
+	assert ( i == MONSTER_ARRAY_SIZE );
 }
 
-//Dungeon toString -- output basic info about the day and player progress
-std::ostream& operator<<(std::ostream& ostr, const Dungeon& d){
+/*  Standard toString operation.
+ *  @param ostr, current outstream for program
+ *  @param d, Dungeon object to print
+ *  @modifies ostr
+ *  @effects Loads 'ostr' with all data available in 'd'.
+ *  @return ostr
+ */
+std::ostream& operator<<(std::ostream& ostr, const Dungeon& d) {
 	ostr << std::endl << "PRINTING DUNGEON" << std::endl << std::endl;
-	ostr << "Day: " << *(d.currDay) << std::endl;
-	ostr << "daysPassed: " << d.daysPassed << std::endl;
+	ostr << "Day: " << *(d._currDay) << std::endl;
+	ostr << "daysPassed: " << d._daysPassed << std::endl;
 	ostr << "Monsters Stored: " << std::endl; 
-	for(int i = 0; i < d.MONSTER_ARRAY_SIZE; i++){
-		ostr << d.monsterNames[i] << " " << d.monsterTypes[i] << std::endl;
+	for ( unsigned int i = 0; i < d.MONSTER_ARRAY_SIZE; ++i ) {
+		ostr << d._monsterNames[i] << " " << d._monsterTypes[i] << std::endl;
 	}
-	ostr << "Player: " << *(d.player_) << std::endl;
-
+	ostr << "Player: " << *(d._player) << std::endl;
 	ostr << "END OF DUNGEON OBJECT" << std::endl;
 	
 	return ostr;
 }
 
-//move currDay to the next day of the week
+/*  Time progression.
+ *  @modifies _daysPassed, _currDay
+ *  @effects Increments '_daysPassed' and iterates in '_currDay'
+ */
 void Dungeon::progressToNextDay(){
-	daysPassed+=1;
+	++_daysPassed;
 	generateMonster();
-	currDay->moveForwardOneDay();
+	_currDay->moveForwardOneDay();
 }
 
-//decrease currHrs by input numHrs; if currHours reaches 0, move to the next day
-void Dungeon::subtractHrs(float numHrs){
-	float& currHrs = currDay->hoursOfDay_;
-	if(numHrs >= currHrs){
-		float remainder = numHrs - currHrs;
+/*  Hour decrementing operation.
+ *  @param numHrs
+ *  @modifies _currDay->_hoursOfDay
+ *  @effects Decreases '_currDay->_hoursOfDay' by 'numHrs'
+ */
+void Dungeon::subtractHrs(int numHrs){
+	int& currHrs = _currDay->_hoursOfDay;
+	if ( numHrs >= currHrs ) {
+		int remainder = (numHrs - currHrs);
 		//TODO: if we want to allow skipping days through activities we need to make sure a monster is generated
 		//and then then stored(we only should need to auto store if remainder >= 24)
-		progressToNextDay(); //make day move to the next day
+		progressToNextDay();   //make day move to the next day
 		subtractHrs(remainder);
-	}else{
+	} else {
 		currHrs -= numHrs;
 	}
 }
 
-//create new monster stats (currently health, attack, and defense) scaled based on current day 
+/*  Monster stats modifier.
+ *  @param name, name from Monster object
+ *  @param monsterAtt, attack from Monster object
+ *  @param monsterDef, defense from Monster object
+ *  @param monsterHp, health from Monster object
+ *  @modifies name, monsterAtt, monsterDef, monsterHp
+ *  @effects Scales passed Monter stats to '_daysPassed'
+ */
 void Dungeon::scaleStats(std::string& name, int& monsterAtt, int& monsterDef, int& monsterHp){
 	//based on days passed higher as more days pass.
 	int base = 100;
-	monsterHp = base + daysPassed*2;
-	monsterAtt = 5 + ceil(daysPassed*(0.33));
-	monsterDef = 0 + ceil(daysPassed*1.2);
-	int minSize = ( daysPassed < MONSTER_ARRAY_SIZE ? daysPassed : MONSTER_ARRAY_SIZE);
-	int nameInd = rand()%  minSize;//std::max(daysPassed)//, Dungeon::MONSTER_ARRAY_SIZE);
-	name = monsterNames[nameInd];
+	monsterHp = (base + _daysPassed * 2);
+	monsterAtt = (5 + ceil( _daysPassed * 0.33 ));
+	monsterDef = (0 + ceil( _daysPassed * 1.2 ));
+	int minSize = ( _daysPassed < MONSTER_ARRAY_SIZE ? _daysPassed : MONSTER_ARRAY_SIZE );
+	int nameInd = (rand() %  minSize);//std::max(daysPassed)//, Dungeon::MONSTER_ARRAY_SIZE);
+	name = _monsterNames[nameInd];
 }
 
-//create a new monster of a randomly chosen id
+/*  Creates new Monster object.
+ *  @modifies _currDay
+ *  @effects Assigns a new Monster to '_currDay'.
+ */
 void Dungeon::generateMonster(){
 	int monsterHp, monsterAtt, monsterDef;
 	std::string name;
 	scaleStats(name, monsterAtt, monsterDef, monsterHp);
-	currDay->setMonster(name, monsterAtt, monsterDef, monsterHp);
-	currDay->currentMonster_->getName();
+	_currDay->setMonster(name, monsterAtt, monsterDef, monsterHp);
+	_currDay->_currentMonster->getName();
 }
