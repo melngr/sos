@@ -9,9 +9,9 @@
 
 class SkillFactory {
 public:
-	static Skill* getSkill(std::string skillName){
+	static Skill* getSkill(std::string skillName, int maxUses){
 		if(skillName == "Hack Solution"){
-			Skill* newSkill = new SkillHack("Hack Solution", 30);
+			Skill* newSkill = new SkillHack("Hack Solution", maxUses);
 			return newSkill;
 		}else{
 			return NULL;

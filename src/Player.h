@@ -36,7 +36,7 @@ public:
 	int skillIndex(std::string skillName);
 
 	void learnSkill(std::string newSkill, int maxUses){
-		Skill* skill = SkillFactory::getSkill(newSkill);
+		Skill* skill = SkillFactory::getSkill(newSkill, maxUses);
 		_skills.push_back(skill);
 	}
 
