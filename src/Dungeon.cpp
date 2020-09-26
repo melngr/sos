@@ -54,8 +54,8 @@ void Dungeon::readFile(char* inFileName, std::ifstream &ifstr) {
 void Dungeon::loadMonsterData() {
 	// attempt to load in MonsterNameList.txt
 	std::ifstream ifstr;
-	char* file = (char*) ("MonterNameList.txt");
-	readFile(file, ifstr);
+	// char* file = (char*) ("MonterNameList.txt");
+	readFile("MonsterNameList.txt", ifstr);
 
 	std::string line, name, type, delim = ", ";
 
@@ -74,7 +74,7 @@ void Dungeon::loadMonsterData() {
 	}
 
 	// assert that monster data arrays have length 'MONSTER_ARRAY_SIZE'
-	assert ( i == MONSTER_ARRAY_SIZE );
+	assert( i == MONSTER_ARRAY_SIZE );
 }
 
 /*  Standard toString operation.
